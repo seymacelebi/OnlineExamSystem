@@ -20,17 +20,17 @@ namespace OnlineExamSystem.Controllers
         [HttpGet]
         public IActionResult AddQuestions()
         {
-            int studentId = Convert.ToInt32(Session["ad_id"]);
-            List<Course> list = c.Courses.Where(x => x.CourseId == studentId).ToList();
-            ViewBag.list = new SelectList(list, "CourseId", "Title");
+            //int studentId = Convert.ToInt32(Session["ad_id"]);
+            //List<Course> list = c.Courses.Where(x => x.CourseId == studentId).ToList();
+            //ViewBag.list = new SelectList(list, "CourseId", "Title");
             return View();
         }
         [HttpPost]
         public IActionResult AddQuestions(Question question)
         {
-            int studentId = Convert.ToInt32(Session["ad_id"]);
-            List<Course> list = c.Courses.Where(x => x.CourseId == studentId).ToList();
-            ViewBag.list = new SelectList(list, "CourseId", "Title");
+            //int studentId = Convert.ToInt32(Session["ad_id"]);
+            //List<Course> list = c.Courses.Where(x => x.CourseId == studentId).ToList();
+            //ViewBag.list = new SelectList(list, "CourseId", "Title");
             
             Question q = new Question();
             q.QuestionText = question.QuestionText;
