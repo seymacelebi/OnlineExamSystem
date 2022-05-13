@@ -1,3 +1,7 @@
+using Business.Abstract;
+using Business.Concrete;
+using DataAccess.Abstract;
+using DataAccess.Concrete.EntityFramework;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
@@ -28,6 +32,8 @@ namespace OnlineExamSystem
         {
             services.AddControllersWithViews();
             services.AddSession();
+            services.AddScoped<IStudentService, StudentManager>();
+            services.AddScoped<IStudentDal, EfStudentDal>();
 
             services.AddMvc(config =>
             {

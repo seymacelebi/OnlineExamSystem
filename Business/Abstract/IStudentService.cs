@@ -10,7 +10,7 @@ namespace Business.Abstract
     public interface IStudentService
     {
         List<Student> GetById(int userId);
-        List<Student> GetByStudentId(string studentId);
+        List<Student> GetByStudentId(int studentId);
         List<Student> GetList();
         void Add(Student student);
         void Delete(Student student);

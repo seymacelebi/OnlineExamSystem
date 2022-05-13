@@ -57,7 +57,7 @@ namespace WebUI.Controllers
         //    if (adminuserinfo != null)
         //    {
         //        FormsAuthentication.SetAuthCookie(adminuserinfo.AdminUserName, false);
-        //        Session["AdminUserName"] = adminuserinfo.AdminUserName;
+           //    Session["AdminUserName"] = adminuserinfo.AdminUserName;
         //        return RedirectToAction("Index", "AdminCategory");
         //    }
         //    else

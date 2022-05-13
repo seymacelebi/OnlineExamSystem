@@ -12,7 +12,7 @@ namespace DataAccess.Concrete
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server=(localdb)\MSSQLLocalDB;Database=OnlineExam;Trusted_Connection=true");
+            optionsBuilder.UseSqlServer(@"Server=DESKTOP-5J89KL6;Database=OnlineExamination;Trusted_Connection=true");
         }
         //hangi veritabanı hangisine bağlı onu gösteriyoruz.
         public DbSet<User> Users { get; set; }
