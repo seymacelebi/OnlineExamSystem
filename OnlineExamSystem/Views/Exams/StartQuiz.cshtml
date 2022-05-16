@@ -1,0 +1,64 @@
+﻿@model Entities.Concrete.Question
+@{
+    ViewData["Title"] = "StartQuiz";
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Sınavı Başlat</title>
+</head>
+<body>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <div class="form-group">
+            <h4>Questions</h4>
+            <hr />
+            @Html.LabelFor(model=>model.QuestionText,  htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class=col-md-10>
+                @Html.DisplayFor(model=>model.QuestionText, new {htmlAttributes = new {@class="form-control"}})
+                @Html.ValidationMessageFor(model=>model.QuestionText, "", new {@class = "text-danger"})
+            </div>
+     
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.QuestionA, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <span>@Html.RadioButtonFor(model=>model.QuestionA, new {htmlAttributes = new {@class="form-control"}}) @Model.QuestionA)</span>
+                @Html.ValidationMessageFor(model=>model.QuestionA, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.QuestionB, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <span>@Html.RadioButtonFor(model=>model.QuestionB, new {htmlAttributes = new {@class="form-control"}}) @Model.QuestionB)</span>
+                @Html.ValidationMessageFor(model=>model.QuestionB, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.QuestionC, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <span>@Html.RadioButtonFor(model=>model.QuestionC, new {htmlAttributes = new {@class="form-control"}}) @Model.QuestionC)</span>
+                @Html.ValidationMessageFor(model=>model.QuestionC, "", new { @class = "text-danger" })
+            </div>
+        </div>
+         <div class="form-group">
+            @Html.LabelFor(model => model.QuestionD, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <span>@Html.RadioButtonFor(model=>model.QuestionD, new {htmlAttributes = new {@class="form-control"}}) @Model.QuestionD)</span>
+                @Html.ValidationMessageFor(model=>model.QuestionD, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+      <div class="form-group">
+        <div class="col-md-10">
+            <input type="submit" value="Submit" class="btn btn-default" />
+        </div>
+    </div>
+       </div>
+    }
+</body>
+</html>
+

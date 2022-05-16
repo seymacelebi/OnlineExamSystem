@@ -46,5 +46,30 @@ namespace OnlineExamSystem.Controllers
             ViewBag.message = "Question successfully added";
             return View();
         }
+        public IActionResult StartQuiz()
+        {
+            Question question=null;
+            int examId = Convert.ToInt32(TempData["examid"].ToString());
+
+            if (TempData["Id"] == null)
+            {
+                question =c.Questions.First(x => x.CourseId == examId);
+                TempData["Id"] = ++question.Id;
+            }
+            else
+            {
+                int questionId = Convert.ToInt32(TempData["questionId"].ToString());
+                question =c.Questions.Where(x => x.Id ==questionId && x.CourseId == examId).SingleOrDefault();
+                TempData["Id"] = ++question.Id;
+
+            }
+            TempData.Keep();
+            return View(question);
+        }
+        [HttpPost]
+        public IActionResult StartQuiz(Question question)
+        {
+            return RedirectToAction("StartQuiz");
+        }
     }
 }
