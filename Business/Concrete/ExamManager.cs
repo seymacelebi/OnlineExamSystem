@@ -43,7 +43,7 @@ namespace Business.Concrete
 
         public List<Exam> GetById(int examId)
         {
-            return _examDal.GetList(x => x.Id == examId);
+            return _examDal.GetList(x => x.ExamId == examId);
 
         }
 
