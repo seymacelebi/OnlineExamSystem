@@ -1,0 +1,63 @@
+﻿@model Question
+@{
+    ViewData["Title"] = "ViewAllQuestions";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>ViewAllQuestions</h1>
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.QuestionText)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.QuestionA)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.QuestionB)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.QuestionC)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.QuestionD)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.QCorrectAns)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CourseId)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <td>
+            @Html.DisplayFor(modelItem => item.QuestionText)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.QuestionA)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.QuestionB)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.QuestionC)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.QuestionD)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.QCorrectAns)
+        </td>
+        <td>
+        @Html.ActionLink("Edit", "Edit", new  {id= item.QuestionId })
+        @Html.ActionLink("Delete", "Delete", new  {id= item.QuestionId })
+
+        </td>
+    }
+</table>

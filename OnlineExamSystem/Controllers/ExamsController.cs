@@ -49,63 +49,116 @@ namespace OnlineExamSystem.Controllers
             ViewBag.message = "Question successfully added";
             return View();
         }
-        [HttpGet]
-        public IActionResult StartQuiz()
+     
+        public IActionResult ExamDashboard()
         {
-            if (TempData["i"] ==null)
-            {
-                TempData["i"] = 1;
-            }
-           
-            //if (Session["StudentId"]==null)
-            //{
-            //    return RedirectToAction("studentlogin");
-            //}
-            if (TempData["ExamId"] == null)
-            {
-                return RedirectToAction("ExamDashboard");
+            return View();
 
-            }
-            try
+        }
+        [HttpPost]
+        public IActionResult ExamDashboard(string course)
+        {
+            List<Course> listCourse = c.Courses.ToList();
+            foreach (var item in listCourse)
             {
-                Question question = null;
-                int examId = Convert.ToInt32(TempData["ExamId"].ToString());
-
-                if (TempData["Id"] == null)
+                if (item.Title==course)
                 {
-                    int q_id =Convert.ToInt32(TempData["Id"].ToString());
-                    question = c.Questions.Where(x=>x.Id== q_id &&  x.CourseId == examId).SingleOrDefault();
-                    var list =c.Questions.Skip(Convert.ToInt32(TempData["i"].ToString())).ToList();
-                    //var list = c.Questions.Skip(1);
-                     q_id = list.First().Id;
-                    TempData["Id"] = ++question.Id;
+                    List<Question> list = c.Questions.Where(x => x.CourseId == item.CourseId).ToList();
+                    Queue<Question> queue = new Queue<Question>();
+                    foreach (Question question in list)
+                    {
+                        queue.Enqueue(question);
+                    }
+                    TempData["questions"] = queue;
+
+                    TempData["score"] = 0;
+
+                    TempData["examid"] = item.CourseId;
+                    TempData.Keep();
+                    return RedirectToAction("Start Quiz");
 
                 }
                 else
                 {
-                    int questionId = Convert.ToInt32(TempData["questionId"].ToString());
-                    question = c.Questions.Where(x => x.Id == questionId && x.CourseId == examId).SingleOrDefault();
-                    var list = c.Questions.Skip(Convert.ToInt32(TempData["i"].ToString())).ToList();
-                    questionId = list.First().Id;
-                    TempData["Id"] = ++question.Id;
-                    TempData[i] = Convert.ToInt32(TempData["i"].ToString()) + 1;
-
+                    ViewBag.error = "No course found ...";
                 }
-                TempData.Keep();
-                return View(question);
-
             }
-            catch (Exception)
-            {
-                return RedirectToAction("studentlogin");
-
-            }
-
+            return View();
         }
+  
+        public IActionResult StartQuiz()
+        {
+            //if (Session["studentId"]==null)
+            //{
+            //    return RedirectToAction("ExamDashboard");
+            //}
+            Question question = null;
+            if (TempData["questions"]==null)
+            {
+                Queue<Question> qlist = (Queue<Question>)TempData["questions"];
+                if (qlist.Count>0)
+                {
+                    question = qlist.Peek();
+                    qlist.Dequeue();
+
+                    TempData["questions"] = qlist;
+                    TempData.Keep();
+                }
+                else
+                {
+                    return RedirectToAction("EndExam");
+                }
+            }
+            return View(question);
+        }
+
         [HttpPost]
         public IActionResult StartQuiz(Question question)
         {
+            string correctans;           
+            if (question.QuestionA!=null)
+            {
+                correctans = "A";
+            }
+            else if (question.QuestionB != null)
+            {
+                correctans = "B";   
+            }
+            else if (question.QuestionC != null)
+            {
+                correctans = "C";
+            }
+            else if (question.QuestionD != null)
+            {
+                correctans = "D";
+            }
+
+            //if (correctans.Equals(question.QuestionA))
+            //{
+            //    TempData["score"] = Convert.ToInt32(TempData["score"]) + 1 ;
+            //}
+            TempData.Keep();
+        
             return RedirectToAction("StartQuiz");
+        }
+        public IActionResult ViewAllQuestions(int ?id, int page)
+        {
+            //if (Session["ad_id"]==null)
+            //{              
+            //    return RedirectToAction("tlogin");
+            //}
+            if (id==null)
+            {
+                return RedirectToAction("Dashboard");
+            }
+            int pagesize = 15, pageIndex = 1;
+         
+            return View(c.Questions.Where(x => x.CourseId == id).ToList());
+            
+        }
+        public IActionResult EndExam(Question question)
+        {
+            return View();
         }
     }
 }

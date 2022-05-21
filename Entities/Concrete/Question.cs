@@ -8,10 +8,10 @@ namespace Entities.Concrete
         public int Id { get; set; }
         [Display(Name = "Question")]
         public string QuestionText { get; set; }
-        public char QuestionA { get; set; }
-        public char QuestionB { get; set; }
-        public char QuestionC { get; set; }
-        public char QuestionD { get; set; }
+        public string QuestionA { get; set; }
+        public string QuestionB { get; set; }
+        public string QuestionC { get; set; }
+        public string QuestionD { get; set; }
         public string QCorrectAns { get; set; }
         public int CourseId { get; set; }
     }
