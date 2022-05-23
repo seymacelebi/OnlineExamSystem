@@ -1,5 +1,4 @@
-﻿@model Question
-@{
+﻿@model IEnumerable<Question>
     ViewData["Title"] = "ViewAllQuestions";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -34,30 +33,30 @@
         <th></th>
     </tr>
 
-    @*@foreach (var item in Model)
-    {
-        <td>
-            @Html.DisplayFor(modelItem => item.QuestionText)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.QuestionA)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.QuestionB)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.QuestionC)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.QuestionD)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.QCorrectAns)
-        </td>
-        <td>
-        @Html.ActionLink("Edit", "Edit", new  {id= item.QuestionId })
-        @Html.ActionLink("Delete", "Delete", new  {id= item.QuestionId })
+    @foreach (var item in Model)
+        {
+            <td>
+                @Html.DisplayFor(modelItem => item.QuestionText)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.QuestionA)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.QuestionB)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.QuestionC)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.QuestionD)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.QCorrectAns)
+            </td>
+            <td>
+            @Html.ActionLink("Edit", "Edit", new  {id= item.Id })
+            @Html.ActionLink("Delete", "Delete", new  {id= item.Id })
 
-        </td>
-    }*@
+            </td>
+        }
 </table>

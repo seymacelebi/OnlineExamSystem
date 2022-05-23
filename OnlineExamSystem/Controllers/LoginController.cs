@@ -21,6 +21,18 @@ namespace WebUI.Controllers
         {
             return View();
         }
+        //public async Task<IActionResult> Login(Login user)
+        //{
+        //    var Login = idorContext.Users.FirstOrDefault(x => x.Email == user.Email && x.password == user.password);
+        //    if (Login != null)
+        //    {
+        //        var claims = new List<Claim> { new Claim(ClaimTypes.Name, Login.Email), new Claim(ClaimTypes.NameIdentifier, Login.Id.ToString()) };
+        //        var userIdentity = new ClaimsIdentity(claims, "login");
+        //        ClaimsPrincipal principal = new ClaimsPrincipal(userIdentity); await HttpContext.SignInAsync(principal);
+        //        return Redirect("/Address/Index");
+        //    }
+        //    return View();
+        //}
         [HttpPost]
         [AllowAnonymous]
         public async Task<ActionResult> Index(User p)
@@ -37,7 +49,7 @@ namespace WebUI.Controllers
                 ClaimsPrincipal principal = new ClaimsPrincipal(useridentity);
                 await HttpContext.SignInAsync(principal);
                 //HttpContext.Session.SetString("username", p.Email);
-                return RedirectToAction("AddStudent", "Students");
+                return RedirectToAction("GetList", "Students");
             }
             else
             {

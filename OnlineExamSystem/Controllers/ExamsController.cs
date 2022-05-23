@@ -30,9 +30,11 @@ namespace OnlineExamSystem.Controllers
         [HttpGet]
         public IActionResult AddQuestions()
         {
+            var studentId = Convert.ToInt32(this.User.FindFirstValue(ClaimTypes.NameIdentifier));
+
             //int studentId = Convert.ToInt32(Session["ad_id"]);
-            //List<Course> list = c.Courses.Where(x => x.CourseId == studentId).ToList();
-            //ViewBag.list = new SelectList(list, "CourseId", "Title");
+            List<Course> list = c.Courses.Where(x => x.CourseId == studentId).ToList();
+            ViewBag.list = new SelectList(list, "CourseId", "Title");
             return View();
         }
         [HttpPost]
@@ -41,8 +43,8 @@ namespace OnlineExamSystem.Controllers
             var userId = Convert.ToInt32(this.User.FindFirstValue(ClaimTypes.NameIdentifier));
 
             //int studentId = Convert.ToInt32(Session["ad_id"]);
-            //List<Course> list = c.Courses.Where(x => x.CourseId == studentId).ToList();
-            //ViewBag.list = new SelectList(list, "CourseId", "Title");
+            List<Course> list = c.Courses.Where(x => x.CourseId == userId).ToList();
+            ViewBag.list = new SelectList(list, "CourseId", "Title");
 
             Question q = new Question();
             q.QuestionText = question.QuestionText;
@@ -58,7 +60,7 @@ namespace OnlineExamSystem.Controllers
             ViewBag.message = "Question successfully added";
             return View();
         }
-     
+      
         public IActionResult ExamDashboard()
         {
             return View();
@@ -97,6 +99,7 @@ namespace OnlineExamSystem.Controllers
   
         public IActionResult StartQuiz()
         {
+           
             //if (Session["studentId"]==null)
             //{
             //    return RedirectToAction("ExamDashboard");
