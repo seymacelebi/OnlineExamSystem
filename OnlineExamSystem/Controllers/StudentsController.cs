@@ -53,5 +53,11 @@ namespace WebUI.Controllers
         //    return BadRequest(result.Message);
         //    return RedirectToAction("Index");
         //}
+        [HttpPost("delete")]
+        public IActionResult Delete(Student student)
+        {
+            _studentService.Delete(student);       
+            return RedirectToAction("Index");
+        }
     }
 }

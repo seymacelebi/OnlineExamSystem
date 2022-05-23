@@ -1,4 +1,6 @@
-﻿using DataAccess.Concrete;
+﻿using Business.Concrete;
+using DataAccess.Concrete;
+using DataAccess.Concrete.EntityFramework;
 using Entities.Concrete;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -13,10 +15,17 @@ namespace OnlineExamSystem.Controllers
 {
     public class ExamsController : Controller
     {
+        ExamManager examManager = new ExamManager(new EfExamDal());
         Context c = new Context();
         public IActionResult Index()
         {
             return View();
+        }
+        [HttpGet]
+        public IActionResult GetList()
+        {
+            var examvalues = examManager.GetList();
+            return View(examvalues);
         }
         [HttpGet]
         public IActionResult AddQuestions()
@@ -143,7 +152,7 @@ namespace OnlineExamSystem.Controllers
         }
         public IActionResult ViewAllQuestions(int ?id, int page)
         {
-            //if (Session["ad_id"]==null)
+            //if (Session["ad_id"]==null) 
             //{              
             //    return RedirectToAction("tlogin");
             //}

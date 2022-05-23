@@ -32,6 +32,11 @@ namespace OnlineExamSystem
         {
             services.AddControllersWithViews();
             services.AddSession();
+            //services.AddSession(option =>
+            //{
+            //    //Süre 1 dk olarak belirlendi
+            //    option.IdleTimeout = TimeSpan.FromMinutes(1);
+            //});
             services.AddScoped<IStudentService, StudentManager>();
             services.AddScoped<IStudentDal, EfStudentDal>();
 

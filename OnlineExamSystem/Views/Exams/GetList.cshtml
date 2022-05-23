@@ -1,0 +1,30 @@
+﻿@using Entities.Concrete
+@model List<Exam>
+@{
+    ViewData["Title"] = "GetList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>GetList</h1>
+<br />
+<link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+<table class="table table-bordered">
+    <tr>
+        <th>Title</th>
+        <th>Information</th>
+        <th>Number of Question</th>
+        <th>Start Time</th>
+        <th>End Time</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.Title</td>
+            <td>@item.Information</td>
+            <td>@item.NumberOfQuestion</td>
+            <td>@item.StartTime</td>
+            <td>@item.EndTime</td>
+
+        </tr>
+    }
+</table>

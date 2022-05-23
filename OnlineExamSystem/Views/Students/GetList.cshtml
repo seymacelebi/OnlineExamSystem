@@ -1,0 +1,23 @@
+﻿@model IEnumerable<Student>
+@{
+    ViewData["Title"] = "GetList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>GetList</h1>
+
+<table class="table table-bordered">
+    <tr>
+        <th>STUDENT ID</th>
+        <th>REGISTER DATE</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.StudentId</td>
+            <td>@item.RegisterDate</td>
+        </tr>
+    }
+</table>
+
+
