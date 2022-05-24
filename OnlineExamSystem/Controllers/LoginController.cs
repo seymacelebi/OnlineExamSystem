@@ -41,18 +41,17 @@ namespace WebUI.Controllers
             var datavalue = c.Users.FirstOrDefault(x => x.Email == p.Email && x.Password == p.Password);
             if (datavalue != null)
             {
-                var claims = new List<Claim>
-                {
-                    new Claim(ClaimTypes.Name, p.Email)
-                };
+                var claims = new List<Claim> { new Claim(ClaimTypes.Name, p.Email), new Claim(ClaimTypes.NameIdentifier, p.Id.ToString()) };
+
                 var useridentity = new ClaimsIdentity(claims, "a");
                 ClaimsPrincipal principal = new ClaimsPrincipal(useridentity);
                 await HttpContext.SignInAsync(principal);
                 //HttpContext.Session.SetString("username", p.Email);
-                return RedirectToAction("GetList", "Students");
+                return RedirectToAction("AddQuestions", "Exams");
             }
             else
             {
+
                 return View();
             }
         }

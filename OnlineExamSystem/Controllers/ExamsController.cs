@@ -28,13 +28,32 @@ namespace OnlineExamSystem.Controllers
             return View(examvalues);
         }
         [HttpGet]
+        public IActionResult AddCourse()
+        {
+            List<Course> courselist = c.Courses.OrderByDescending(x => x.CourseId).ToList();
+            ViewData["list"] = courselist;
+            return View();
+        }
+        [HttpPost]
+        public IActionResult AddCourse(Course course)
+        {
+            List<Course> courselist = c.Courses.OrderByDescending(x => x.CourseId).ToList();
+            ViewData["list"] = courselist;
+            Course courses = new Course();
+            courses.Title = course.Title;
+            //courses.CourseId = Convert.ToInt32(Session["ad_id"].ToString());
+            c.Courses.Add(courses);
+            c.SaveChanges();
+            return View();
+        }
+        [HttpGet]
         public IActionResult AddQuestions()
         {
-            var studentId = Convert.ToInt32(this.User.FindFirstValue(ClaimTypes.NameIdentifier));
+            var studentId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
 
             //int studentId = Convert.ToInt32(Session["ad_id"]);
-            List<Course> list = c.Courses.Where(x => x.CourseId == studentId).ToList();
-            ViewBag.list = new SelectList(list, "CourseId", "Title");
+            //List<Course> list = c.Courses.Where(x => x.CourseId == studentId).ToList();
+            //ViewBag.list = new SelectList(list, "CourseId", "Title");
             return View();
         }
         [HttpPost]

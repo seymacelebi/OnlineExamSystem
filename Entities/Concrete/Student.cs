@@ -8,6 +8,7 @@ namespace Entities.Concrete
         public int Id { get; set; }
         public int UserId { get; set; }
         public int StudentId { get; set; }
+        public User User{ get; set; }
         public DateTime RegisterDate { get; set; }
     }
 }
