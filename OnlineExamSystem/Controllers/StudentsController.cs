@@ -2,6 +2,7 @@
 using Business.Concrete;
 using DataAccess.Concrete.EntityFramework;
 using Entities.Concrete;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -10,6 +11,7 @@ using System.Threading.Tasks;
 
 namespace WebUI.Controllers
 {
+    [AllowAnonymous]
     public class StudentsController : Controller
     {
         //IStudentService studentManager = new StudentManager(new EfStudentDal());

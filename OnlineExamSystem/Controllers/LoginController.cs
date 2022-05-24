@@ -13,10 +13,11 @@ using System.Threading.Tasks;
 
 namespace WebUI.Controllers
 {
+  
     public class LoginController : Controller
     {
         UserManager userManager = new UserManager(new EfUserDal());
-        [AllowAnonymous]
+      
         public IActionResult Index()
         {
             return View();
@@ -34,19 +35,23 @@ namespace WebUI.Controllers
         //    return View();
         //}
         [HttpPost]
-        [AllowAnonymous]
+      
         public async Task<ActionResult> Index(User p)
         {
             Context c = new Context();
             var datavalue = c.Users.FirstOrDefault(x => x.Email == p.Email && x.Password == p.Password);
             if (datavalue != null)
             {
-                var claims = new List<Claim> { new Claim(ClaimTypes.Name, p.Email), new Claim(ClaimTypes.NameIdentifier, p.Id.ToString()) };
+                var claims = new List<Claim>
+                {
+                    new Claim(ClaimTypes.Name,datavalue.Email),
+                    new Claim(ClaimTypes.NameIdentifier,datavalue.Id.ToString())
+                };
 
-                var useridentity = new ClaimsIdentity(claims, "a");
+                var useridentity = new ClaimsIdentity(claims, "login");
                 ClaimsPrincipal principal = new ClaimsPrincipal(useridentity);
                 await HttpContext.SignInAsync(principal);
-                //HttpContext.Session.SetString("username", p.Email);
+               
                 return RedirectToAction("AddQuestions", "Exams");
             }
             else
