@@ -56,7 +56,8 @@ namespace OnlineExamSystem.Controllers
             //int studentId = Convert.ToInt32(Session["ad_id"]);
             //List<Course> list = c.Courses.Where(x => x.CourseId == studentId).ToList();
             //ViewBag.list = new SelectList(list, "CourseId", "Title");
-            return View(c.Questions.ToList());
+           
+            return View();//buradan course ıd gönderilip diğer sayfaya gönderilecek yapabilirsen yap yapamazsan yarın bakarız
         }
         [HttpPost]
         public IActionResult AddQuestions(Question question)
@@ -75,10 +76,10 @@ namespace OnlineExamSystem.Controllers
             q.QuestionD = question.QuestionD;
             q.QCorrectAns = question.QCorrectAns;
 
-            q.CourseId = question.CourseId;
+            q.CourseId = 1;//bu nerden geliyor bilmiyorum yarın bakarız
             c.Questions.Add(q);
             c.SaveChanges();
-            ViewBag.message = "Question successfully added";
+            /*ViewBag.message = "Question successfully added";*///bunuda hallederiz yarın test edip
             return View();
         }
       

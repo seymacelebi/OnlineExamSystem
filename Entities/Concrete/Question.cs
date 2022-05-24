@@ -6,7 +6,7 @@ namespace Entities.Concrete
     public class Question : IEntity
     {
         public int Id { get; set; }
-        [Display(Name = "Question")]
+        [Display(Name = "QuestionText")]
         public string QuestionText { get; set; }
         public string QuestionA { get; set; }
         public string QuestionB { get; set; }
