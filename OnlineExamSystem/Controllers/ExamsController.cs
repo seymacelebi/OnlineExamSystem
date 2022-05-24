@@ -56,7 +56,7 @@ namespace OnlineExamSystem.Controllers
             //int studentId = Convert.ToInt32(Session["ad_id"]);
             //List<Course> list = c.Courses.Where(x => x.CourseId == studentId).ToList();
             //ViewBag.list = new SelectList(list, "CourseId", "Title");
-            return View();
+            return View(c.Questions.ToList());
         }
         [HttpPost]
         public IActionResult AddQuestions(Question question)
