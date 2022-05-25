@@ -45,7 +45,7 @@ namespace WebUI.Controllers
                 var claims = new List<Claim>
                 {
                     new Claim(ClaimTypes.Name,datavalue.Email),
-                    new Claim(ClaimTypes.NameIdentifier,datavalue.Id.ToString())
+                    new Claim(ClaimTypes.NameIdentifier,datavalue.UserId.ToString())
                 };
 
                 var useridentity = new ClaimsIdentity(claims, "login");

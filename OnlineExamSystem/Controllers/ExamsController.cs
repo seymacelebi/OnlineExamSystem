@@ -65,7 +65,7 @@ namespace OnlineExamSystem.Controllers
             var userId = Convert.ToInt32(this.User.FindFirstValue(ClaimTypes.NameIdentifier));
 
             //int studentId = Convert.ToInt32(Session["ad_id"]);
-            List<Course> list = c.Courses.Where(x => x.CourseId == userId).ToList();
+            List<Course> list = c.Courses.Where(x => x.InstructorId == userId).ToList();
             ViewBag.list = new SelectList(list, "CourseId", "Title");
 
             Question q = new Question();

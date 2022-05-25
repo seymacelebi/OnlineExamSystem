@@ -1,5 +1,6 @@
 ﻿using Core.Entities.Abstract;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Entities.Concrete
 {
@@ -13,6 +14,9 @@ namespace Entities.Concrete
         public string QuestionC { get; set; }
         public string QuestionD { get; set; }
         public string QCorrectAns { get; set; }
+
+        [ForeignKey("CourseId")]
+        public Course Course { get; set; }
         public int CourseId { get; set; }
     }
 }

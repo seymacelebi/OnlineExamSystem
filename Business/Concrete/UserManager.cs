@@ -34,7 +34,7 @@ namespace Business.Concrete
 
         public List<User> GetById(int userId)
         {
-            return _userDal.GetList(x => x.Id == userId);
+            return _userDal.GetList(x => x.UserId == userId);
         }
 
         public User GetByLastName(string lastName)
