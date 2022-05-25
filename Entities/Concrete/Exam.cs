@@ -1,12 +1,14 @@
 ﻿using Core.Entities.Abstract;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Entities.Concrete
 {
+    [Table("Exam")]
     public class Exam : IEntity
     {
         public int ExamId { get; set; }

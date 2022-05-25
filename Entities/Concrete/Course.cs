@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Entities.Concrete
 {
+    [Table("Course")]
     public class Course : IEntity
     {
         public int CourseId { get; set; }
