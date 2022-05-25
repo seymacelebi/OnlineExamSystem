@@ -29,7 +29,9 @@ namespace OnlineExamSystem.Controllers
             var examvalues = examManager.GetList();
             return View(examvalues);
         }
+        
         [HttpGet]
+        [Authorize(Policy = "Admin")]
         public IActionResult AddCourse()
         {
             List<Course> courselist = c.Courses.OrderByDescending(x => x.CourseId).ToList();
@@ -37,6 +39,7 @@ namespace OnlineExamSystem.Controllers
             return View();
         }
         [HttpPost]
+        [Authorize(Policy = "Admin")]
         public IActionResult AddCourse(Course course)
         {
             List<Course> courselist = c.Courses.OrderByDescending(x => x.CourseId).ToList();
@@ -49,6 +52,7 @@ namespace OnlineExamSystem.Controllers
             return View();
         }
         [HttpGet]
+        [Authorize(Policy = "Admin")]
         public IActionResult AddQuestions()
         {
             var studentId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -60,11 +64,12 @@ namespace OnlineExamSystem.Controllers
             return View();//buradan course ıd gönderilip diğer sayfaya gönderilecek yapabilirsen yap yapamazsan yarın bakarız
         }
         [HttpPost]
+        [Authorize(Policy = "Admin")]
         public IActionResult AddQuestions(Question question)
         {
             var userId = Convert.ToInt32(this.User.FindFirstValue(ClaimTypes.NameIdentifier));
             List<Course> list = c.Courses.Where(x => x.UserId == userId).ToList();
-            ViewBag.list = new SelectList(list, "CourseId", "Title");
+            //ViewBag.list = new SelectList(list, "CourseId", "Title");
 
             Question q = new Question();
             q.QuestionText = question.QuestionText;

@@ -37,8 +37,8 @@ namespace OnlineExamSystem
             //    //Süre 1 dk olarak belirlendi
             //    option.IdleTimeout = TimeSpan.FromMinutes(1);
             //});
-            services.AddScoped<IStudentService, StudentManager>();
-            services.AddScoped<IStudentDal, EfStudentDal>();
+            services.AddScoped<IUserService, UserManager>();
+            services.AddScoped<IUserDal, EfUserDal>();
 
             services.AddMvc(config =>
             {
@@ -47,13 +47,18 @@ namespace OnlineExamSystem
                 .Build();
                 config.Filters.Add(new AuthorizeFilter(policy));
             });
+
             services.AddAuthentication(
                 CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie(x =>
                 {
                     x.LoginPath = "/Login/Index";
+                    x.AccessDeniedPath = "/Login/Index";
                 }
+                
                 );
+            services.AddAuthorization(x => x.AddPolicy("Admin", policy => policy.RequireClaim("Admin", "Admin")));
+            //[Authorize(Policy = "Admin")]
         }
 
 

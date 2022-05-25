@@ -15,9 +15,9 @@ namespace WebUI.Controllers
     public class StudentsController : Controller
     {
         //IStudentService studentManager = new StudentManager(new EfStudentDal());
-        IStudentService _studentService;
+        IUserService _studentService;
 
-        public StudentsController(IStudentService productService)
+        public StudentsController(IUserService productService)
         {
             _studentService = productService;
         }
@@ -38,9 +38,9 @@ namespace WebUI.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult AddStudent(Student student)
+        public IActionResult AddStudent(User User)
         {
-            _studentService.Add(student);
+            _studentService.Add(User);
             return RedirectToAction("Index");
         }
         //[HttpPost("delete")]
@@ -56,7 +56,7 @@ namespace WebUI.Controllers
         //    return RedirectToAction("Index");
         //}
         [HttpPost("delete")]
-        public IActionResult Delete(Student student)
+        public IActionResult Delete(User student)
         {
             _studentService.Delete(student);       
             return RedirectToAction("Index");

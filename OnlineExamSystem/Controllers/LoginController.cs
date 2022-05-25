@@ -36,6 +36,7 @@ namespace WebUI.Controllers
         //}
         [HttpPost]
         [AllowAnonymous]
+        
         public async Task<ActionResult> Index(User p)
         {
             Context c = new Context();
@@ -45,20 +46,33 @@ namespace WebUI.Controllers
                 var claims = new List<Claim>
                 {
                     new Claim(ClaimTypes.Name,datavalue.Email),
-                    new Claim(ClaimTypes.NameIdentifier,datavalue.UserId.ToString())
+                    new Claim(ClaimTypes.NameIdentifier,datavalue.UserId.ToString()),
+                   
                 };
-
+           
                 var useridentity = new ClaimsIdentity(claims, "login");
                 ClaimsPrincipal principal = new ClaimsPrincipal(useridentity);
                 await HttpContext.SignInAsync(principal);
-               
-                return RedirectToAction("AddQuestions", "Exams");
+                if (!datavalue.IsStudent)
+                {
+                    claims.Add(new Claim(ClaimTypes.Role, "Admin"));
+                    return RedirectToAction("AddQuestions", "Exams");
+
+                }
+
+                return RedirectToAction("GetList", "Exams");
             }
             else
             {
 
                 return View();
             }
+        }
+        public async Task<IActionResult> LogOut()
+        {
+            await HttpContext.SignOutAsync();
+            
+            return RedirectToAction("Index");
         }
         //[HttpGet]
         //public ActionResult AdminIndex()
@@ -73,7 +87,7 @@ namespace WebUI.Controllers
         //    if (adminuserinfo != null)
         //    {
         //        FormsAuthentication.SetAuthCookie(adminuserinfo.AdminUserName, false);
-           //    Session["AdminUserName"] = adminuserinfo.AdminUserName;
+        //    Session["AdminUserName"] = adminuserinfo.AdminUserName;
         //        return RedirectToAction("Index", "AdminCategory");
         //    }
         //    else
