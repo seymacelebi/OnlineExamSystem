@@ -13,9 +13,6 @@ namespace Entities.Concrete
         public string Title { get; set; }
         public DateTime AddedAt { get; set; }
 
-        [ForeignKey("UserId")]
-        public virtual User User { get; set; }
-
         public int UserId { get; set; }
     }
 }

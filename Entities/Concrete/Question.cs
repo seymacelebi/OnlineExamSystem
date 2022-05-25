@@ -15,7 +15,7 @@ namespace Entities.Concrete
         public string QuestionD { get; set; }
         public string QCorrectAns { get; set; }
 
-        [ForeignKey("CourseId")]
+        //[ForeignKey("CourseId")]
         public virtual Course Course { get; set; }
         public int CourseId { get; set; }
     }
