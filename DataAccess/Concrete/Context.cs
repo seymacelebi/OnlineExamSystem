@@ -20,7 +20,7 @@ namespace DataAccess.Concrete
         public DbSet<User> Users { get; set; }
         public DbSet<Course> Courses { get; set; }
         public DbSet<Exam> Exams { get; set; }
-        public DbSet<ExamQuestion> ExamQuestions { get; set; }
+        //public DbSet<ExamQuestion> ExamQuestions { get; set; }
         public DbSet<ExamResult> ExamResults { get; set; }
         public DbSet<Instructor> Instructors { get; set; }
         public DbSet<Question> Questions { get; set; }

@@ -63,9 +63,7 @@ namespace OnlineExamSystem.Controllers
         public IActionResult AddQuestions(Question question)
         {
             var userId = Convert.ToInt32(this.User.FindFirstValue(ClaimTypes.NameIdentifier));
-
-            //int studentId = Convert.ToInt32(Session["ad_id"]);
-            List<Course> list = c.Courses.Where(x => x.InstructorId == userId).ToList();
+            List<Course> list = c.Courses.Where(x => x.UserId == userId).ToList();
             ViewBag.list = new SelectList(list, "CourseId", "Title");
 
             Question q = new Question();
@@ -169,7 +167,7 @@ namespace OnlineExamSystem.Controllers
 
             //if (correctans.Equals(question.QuestionA))
             //{
-            //    TempData["score"] = Convert.ToInt32(TempData["score"]) + 1 ;
+            //    TempData["score"] = Convert.ToInt32(TempData["score"]) + 1;
             //}
             TempData.Keep();
         

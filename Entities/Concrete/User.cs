@@ -1,6 +1,7 @@
 ﻿using Core.Entities.Abstract;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
@@ -8,9 +9,10 @@ using System.Threading.Tasks;
 
 namespace Entities.Concrete
 {
-    [Table("User")]
+    //[Table("User")]
     public class User:IEntity
     {
+        [Key]
         public int UserId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
