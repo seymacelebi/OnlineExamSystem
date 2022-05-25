@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace OnlineExamSystem.Controllers
 {
-    [AllowAnonymous]
+ 
     public class ExamsController : Controller
     {
         ExamManager examManager = new ExamManager(new EfExamDal());

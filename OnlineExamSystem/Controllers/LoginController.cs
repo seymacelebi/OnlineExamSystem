@@ -17,7 +17,7 @@ namespace WebUI.Controllers
     public class LoginController : Controller
     {
         UserManager userManager = new UserManager(new EfUserDal());
-      
+        [AllowAnonymous]
         public IActionResult Index()
         {
             return View();
@@ -35,7 +35,7 @@ namespace WebUI.Controllers
         //    return View();
         //}
         [HttpPost]
-      
+        [AllowAnonymous]
         public async Task<ActionResult> Index(User p)
         {
             Context c = new Context();
