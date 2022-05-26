@@ -6,6 +6,7 @@ namespace Entities.Concrete
 {
     public class Question : IEntity
     {
+        [Key]
         public int Id { get; set; }
         [Display(Name = "QuestionText")]
         public string QuestionText { get; set; }

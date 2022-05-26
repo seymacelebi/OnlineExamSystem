@@ -53,11 +53,11 @@ namespace OnlineExamSystem
                 .AddCookie(x =>
                 {
                     x.LoginPath = "/Login/Index";
-                    x.AccessDeniedPath = "/Login/Index";
+                   
                 }
                 
                 );
-            services.AddAuthorization(x => x.AddPolicy("Admin", policy => policy.RequireClaim("Admin", "Admin")));
+            services.AddAuthorization(x => x.AddPolicy("Ogretmen", policy => policy.RequireClaim("Ogretmen", "Ogretmen")));
             //[Authorize(Policy = "Admin")]
         }
 

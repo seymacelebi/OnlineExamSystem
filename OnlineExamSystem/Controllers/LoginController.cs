@@ -49,17 +49,20 @@ namespace WebUI.Controllers
                     new Claim(ClaimTypes.NameIdentifier,datavalue.UserId.ToString()),
                    
                 };
-           
-                var useridentity = new ClaimsIdentity(claims, "login");
-                ClaimsPrincipal principal = new ClaimsPrincipal(useridentity);
-                await HttpContext.SignInAsync(principal);
+    
                 if (!datavalue.IsStudent)
                 {
-                    claims.Add(new Claim(ClaimTypes.Role, "Admin"));
-                    return RedirectToAction("AddQuestions", "Exams");
+                    claims.Add(new Claim(ClaimTypes.Role, "Ogretmen"));
+                    var a = new ClaimsIdentity(claims, "login");
+                    ClaimsPrincipal b = new ClaimsPrincipal(a);
+                    await HttpContext.SignInAsync(b);
+                    return Redirect("/Exams/AddQuestions");
 
                 }
 
+                var useridentity = new ClaimsIdentity(claims, "login");
+                ClaimsPrincipal principal = new ClaimsPrincipal(useridentity);
+                await HttpContext.SignInAsync(principal);
                 return RedirectToAction("GetList", "Exams");
             }
             else

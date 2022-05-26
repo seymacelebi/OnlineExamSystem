@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace OnlineExamSystem.Controllers
 {
- 
+    [AllowAnonymous]
     public class ExamsController : Controller
     {
         ExamManager examManager = new ExamManager(new EfExamDal());
@@ -31,7 +31,7 @@ namespace OnlineExamSystem.Controllers
         }
         
         [HttpGet]
-        [Authorize(Policy = "Admin")]
+        [Authorize(Policy = "Ogretmen")]
         public IActionResult AddCourse()
         {
             List<Course> courselist = c.Courses.OrderByDescending(x => x.CourseId).ToList();
@@ -39,7 +39,7 @@ namespace OnlineExamSystem.Controllers
             return View();
         }
         [HttpPost]
-        [Authorize(Policy = "Admin")]
+        [Authorize(Policy = "Ogretmen")]
         public IActionResult AddCourse(Course course)
         {
             List<Course> courselist = c.Courses.OrderByDescending(x => x.CourseId).ToList();
@@ -52,7 +52,7 @@ namespace OnlineExamSystem.Controllers
             return View();
         }
         [HttpGet]
-        [Authorize(Policy = "Admin")]
+        [Authorize(Policy = "Ogretmen")]
         public IActionResult AddQuestions()
         {
             var studentId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -64,13 +64,10 @@ namespace OnlineExamSystem.Controllers
             return View();//buradan course ıd gönderilip diğer sayfaya gönderilecek yapabilirsen yap yapamazsan yarın bakarız
         }
         [HttpPost]
-        [Authorize(Policy = "Admin")]
+        [Authorize(Policy = "Ogretmen")]
         public IActionResult AddQuestions(Question question)
         {
-            var userId = Convert.ToInt32(this.User.FindFirstValue(ClaimTypes.NameIdentifier));
-            List<Course> list = c.Courses.Where(x => x.UserId == userId).ToList();
-            //ViewBag.list = new SelectList(list, "CourseId", "Title");
-
+         
             Question q = new Question();
             q.QuestionText = question.QuestionText;
             q.QuestionA = question.QuestionA;
@@ -79,10 +76,10 @@ namespace OnlineExamSystem.Controllers
             q.QuestionD = question.QuestionD;
             q.QCorrectAns = question.QCorrectAns;
 
-            q.CourseId = 1;//bu nerden geliyor bilmiyorum yarın bakarız
+            q.CourseId = 1;
             c.Questions.Add(q);
             c.SaveChanges();
-            /*ViewBag.message = "Question successfully added";*///bunuda hallederiz yarın test edip
+            
             return View();
         }
       
@@ -190,7 +187,7 @@ namespace OnlineExamSystem.Controllers
             }
             int pagesize = 15, pageIndex = 1;
          
-            return View(c.Questions.Where(x => x.CourseId == id).ToList());
+            return View(c.Questions.Where(x => x.CourseId == 1).ToList());
             
         }
         public IActionResult EndExam(Question question)
