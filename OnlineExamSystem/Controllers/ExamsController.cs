@@ -76,6 +76,7 @@ namespace OnlineExamSystem.Controllers
             q.QuestionD = question.QuestionD;
             q.QCorrectAns = question.QCorrectAns;
 
+            //q.CourseId = question.CourseId;
             q.CourseId = 1;
             c.Questions.Add(q);
             c.SaveChanges();
