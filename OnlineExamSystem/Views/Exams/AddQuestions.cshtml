@@ -1,14 +1,14 @@
-﻿@model Entities.Concrete.Question
+﻿@Model 
 @{
     ViewData["Title"] = "AddQuestions";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <form asp-action="AddQuestions" asp-controller="Exams" method="post">
+    <input type="hidden" name="CourseId" value="@Model"/>
     <div class="form-group">
         <label for="QuestionText">Soru içeriğini giriniz</label>
         <br />
-        @*<input type="text" class="form-control" id="QuestionText" name="QuestionText" placeholder="İçerik Giriniz">*@
-        <textarea id="w3review" name="w3review" rows="7" cols="157">
+        <textarea id="w3review" name="QuestionText" rows="7" cols="157">
         </textarea>
 
     </div>

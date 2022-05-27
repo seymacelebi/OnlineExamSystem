@@ -8,7 +8,7 @@ namespace Entities.Concrete
     {
         [Key]
         public int Id { get; set; }
-        [Display(Name = "QuestionText")]
+     
         public string QuestionText { get; set; }
         public string QuestionA { get; set; }
         public string QuestionB { get; set; }

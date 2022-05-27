@@ -23,6 +23,7 @@ namespace OnlineExamSystem.Controllers
         {
             return View();
         }
+
         [HttpGet]
         public IActionResult GetList()
         {
@@ -34,7 +35,7 @@ namespace OnlineExamSystem.Controllers
         [Authorize(Policy = "Ogretmen")]
         public IActionResult AddCourse()
         {
-            List<Course> courselist = c.Courses.OrderByDescending(x => x.CourseId).ToList();
+            List<Course> courselist = c.Course.OrderByDescending(x => x.CourseId).ToList();
             ViewData["list"] = courselist;
             return View();
         }
@@ -42,26 +43,24 @@ namespace OnlineExamSystem.Controllers
         [Authorize(Policy = "Ogretmen")]
         public IActionResult AddCourse(Course course)
         {
-            List<Course> courselist = c.Courses.OrderByDescending(x => x.CourseId).ToList();
+            List<Course> courselist = c.Course.OrderByDescending(x => x.CourseId).ToList();
             ViewData["list"] = courselist;
             Course courses = new Course();
             courses.Title = course.Title;
             //courses.CourseId = Convert.ToInt32(Session["ad_id"].ToString());
-            c.Courses.Add(courses);
+            c.Course.Add(courses);
             c.SaveChanges();
             return View();
         }
         [HttpGet]
         [Authorize(Policy = "Ogretmen")]
-        public IActionResult AddQuestions()
+        public IActionResult AddQuestions(int CourseId)
         {
             var studentId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-            //int studentId = Convert.ToInt32(Session["ad_id"]);
-            //List<Course> list = c.Courses.Where(x => x.CourseId == studentId).ToList();
-            //ViewBag.list = new SelectList(list, "CourseId", "Title");
            
-            return View();//buradan course ıd gönderilip diğer sayfaya gönderilecek yapabilirsen yap yapamazsan yarın bakarız
+           
+            return View(CourseId);
         }
         [HttpPost]
         [Authorize(Policy = "Ogretmen")]
@@ -76,12 +75,11 @@ namespace OnlineExamSystem.Controllers
             q.QuestionD = question.QuestionD;
             q.QCorrectAns = question.QCorrectAns;
 
-            //q.CourseId = question.CourseId;
-            q.CourseId = 1;
+            q.CourseId = question.CourseId;
             c.Questions.Add(q);
             c.SaveChanges();
             
-            return View();
+            return View(question.CourseId);
         }
       
         public IActionResult ExamDashboard()
@@ -92,7 +90,7 @@ namespace OnlineExamSystem.Controllers
         [HttpPost]
         public IActionResult ExamDashboard(string course)
         {
-            List<Course> listCourse = c.Courses.ToList();
+            List<Course> listCourse = c.Course.ToList();
             foreach (var item in listCourse)
             {
                 if (item.Title==course)
@@ -120,30 +118,16 @@ namespace OnlineExamSystem.Controllers
             return View();
         }
   
-        public IActionResult StartQuiz()
+        public IActionResult StartQuiz(int CourseId)
         {
-           
+
             //if (Session["studentId"]==null)
             //{
             //    return RedirectToAction("ExamDashboard");
             //}
-            Question question = null;
-            if (TempData["questions"]==null)
-            {
-                Queue<Question> qlist = (Queue<Question>)TempData["questions"];
-                if (qlist.Count>0)
-                {
-                    question = qlist.Peek();
-                    qlist.Dequeue();
+            var question = c.Questions.Where(x => x.CourseId == CourseId).ToList();
 
-                    TempData["questions"] = qlist;
-                    TempData.Keep();
-                }
-                else
-                {
-                    return RedirectToAction("EndExam");
-                }
-            }
+       
             return View(question);
         }
 

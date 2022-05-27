@@ -1,4 +1,4 @@
-﻿@model Entities.Concrete.Question
+﻿@model List<Entities.Concrete.Question>
 @{
     ViewData["Title"] = "StartQuiz";
     Layout = "~/Views/Shared/_LoginLayout.cshtml";
@@ -29,7 +29,7 @@
 
     <hr />
 
-    @using (Html.BeginForm())
+    @using (Html.BeginForm( method:FormMethod.Post ,actionName:"StartQuiz",controllerName:"Exams" ))
     {
         @Html.AntiForgeryToken()
 
@@ -41,8 +41,10 @@
                 <div class="col-lg-10 col-md-10 col-xs-10 col-sm-10">
 
 
-                    <div class="row">
-                        <h1>@Html.DisplayFor(x => x.QuestionText)</h1>
+                  @foreach (var item in Model)
+                   {
+                     <div class="row">
+                        <h1>@Html.DisplayFor(x=>item.QuestionText)</h1>
 
 
                     </div>
@@ -53,38 +55,38 @@
                     <div class="row">
 
 
-                        <h5>@Html.RadioButtonFor(x => x.QuestionA, Model.Id)@Model.QuestionA</h5>
+                        <h5>@Html.RadioButtonFor(ModelItem => item.QuestionA, item.Id)@item.QuestionA</h5>
 
                     </div>
 
                     <div class="row">
 
 
-                        <h5>@Html.RadioButtonFor(x => x.QuestionB, Model.Id)@Model.QuestionB</h5>
+                        <h5>@Html.RadioButtonFor(x => item.QuestionB, item.Id)@item.QuestionB</h5>
 
                     </div>
                     <div class="row">
 
 
-                        <h5>@Html.RadioButtonFor(x => x.QuestionC, Model.Id)@Model.QuestionC</h5>
+                        <h5>@Html.RadioButtonFor(x => item.QuestionC, item.Id)@item.QuestionC</h5>
 
                     </div>
                     <div class="row">
 
 
-                        <h5>@Html.RadioButtonFor(x => x.QuestionD, Model.Id)@Model.QuestionD</h5>
+                        <h5>@Html.RadioButtonFor(x => item.QuestionD, item.Id)@item.QuestionD</h5>
 
                     </div>
 
                     <div class="row" style="display:none">
 
-                        @Html.TextBoxFor(x => x.QCorrectAns)
+                        @Html.TextBoxFor(x => item.QCorrectAns)
 
                     </div>
-
+                     }
 
                     <div class="row">
-                        <input type="submit" value="submit" class="btn btn-success" />
+                        <input type="submit" value="Sınavı Bitir" class="btn btn-success" />
 
 
 

@@ -1,0 +1,45 @@
+﻿
+
+
+@model List<Entities.Concrete.Course>
+
+<table class="table table-dark">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Ders Adı</th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @if (this.User.IsInRole("Ogretmen"))
+        {
+            @foreach (var x in Model)
+            {
+                <tr>
+                    <th scope="row">@x.CourseId</th>
+                    <td>@x.Title</td>
+                    <td><a href="/Exams/AddQuestions?CourseId=@x.CourseId">Sınav Sorusu Girmek İçin Tıklayınız</a></td>
+                    <td><a href="#">Puan Cetveli</a></td>
+                </tr>
+
+            }
+        }
+        else
+        {
+            foreach (var x in Model)
+            {
+                <tr>
+                    <th scope="row">@x.CourseId</th>
+                    <td>@x.Title</td>
+                    <td><a href="/Exams/StartQuiz?CourseId=@x.CourseId">Sınav </a></td>
+                    <td><a href="#"></a></td>
+                </tr>
+
+            }
+        }
+
+    </tbody>
+</table>
