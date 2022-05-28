@@ -166,10 +166,10 @@ namespace OnlineExamSystem.Controllers
             //{              
             //    return RedirectToAction("tlogin");
             //}
-            if (id==null)
-            {
-                return RedirectToAction("Dashboard");
-            }
+            //if (id==null)
+            //{
+            //    return RedirectToAction("Dashboard");
+            //}
             int pagesize = 15, pageIndex = 1;
          
             return View(c.Questions.Where(x => x.CourseId == 1).ToList());
