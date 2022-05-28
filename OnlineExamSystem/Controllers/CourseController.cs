@@ -1,4 +1,6 @@
-﻿using DataAccess.Concrete;
+﻿using Business.Concrete;
+using DataAccess.Concrete;
+using DataAccess.Concrete.EntityFramework;
 using Entities.Concrete;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -10,6 +12,8 @@ namespace OnlineExamSystem.Controllers
     public class CourseController : Controller
     {
         Context c = new Context();
+        CourseManager courseManager = new CourseManager(new EfCourseDal());
+
         public IActionResult Index()
         {
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -28,6 +32,17 @@ namespace OnlineExamSystem.Controllers
           
             return View(result.ToList());
         }
+        //[HttpGet]
+        //public ActionResult AddCourse()
+        //{
+        //    return View();
+        //}
+        //[HttpPost]
+        //public IActionResult AddCourse(int courseId)
+        //{
+        //    var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+        //    return View();
+        //}
 
 
     }

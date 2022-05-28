@@ -34,8 +34,8 @@ namespace WebUI.Controllers
         public IActionResult GetStudentList(User Student)
         {
             List<User> list = c.Users.Where(x => x.IsStudent == Student.IsStudent).ToList();
-            var result = _studentService.GetList(x=>x.);
-            return View(result);
+           
+            return View(list);
         }
         [HttpGet]
         public IActionResult AddStudent()
