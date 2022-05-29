@@ -1,7 +1,8 @@
-﻿@model List<Entities.Concrete.Question>
+﻿@model Entities.ViewModel.StartQuizVm
 @{
     ViewData["Title"] = "StartQuiz";
     Layout = "~/Views/Shared/_LoginLayout.cshtml";
+    int count = 0;
 }
 <!DOCTYPE html>
 
@@ -29,79 +30,160 @@
 
     <hr />
 
-    @using (Html.BeginForm( method:FormMethod.Post ,actionName:"StartQuiz",controllerName:"Exams" ))
-    {
-        @Html.AntiForgeryToken()
 
 
-        <div class="container">
-            <div class="row">
 
 
-                <div class="col-lg-10 col-md-10 col-xs-10 col-sm-10">
 
 
-                  @foreach (var item in Model)
-                   {
-                     <div class="row">
-                        <h1>@Html.DisplayFor(x=>item.QuestionText)</h1>
+
+    <div class="container">
+        <div class="row">
 
 
+            <div class="col-lg-10 col-md-10 col-xs-10 col-sm-10">
+                  <input type="hidden" name="CourseId" id="CourseId" value="@Model.CourseId" />
+
+                @foreach (var item in Model.Question)
+                {
+                    count = count + 1;
+                    <div id="@count">
+
+                        <input type="hidden" name="QuestionId" id="QuestionId" value="@item.Id" />
+                        <div class="row">
+                            <div class="form-group">
+                                <label for="exampleFormControlTextarea1">Example textarea</label>
+                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="">@item.QuestionText</textarea>
+                            </div>
+                        </div>
+                        <br />
+                        <br />
+                        <br />
+
+                        <div class="row">
+
+
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="@item.QuestionA" id="defaultCheck1" name="A">
+                                <label class="form-check-label" for="defaultCheck1">
+                                    @item.QuestionA
+                                </label>
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+
+
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="@item.QuestionB" id="defaultCheck2" name="B">
+                                <label class="form-check-label" for="defaultCheck2">
+                                    @item.QuestionB
+                                </label>
+                            </div>
+
+                        </div>
+                        <div class="row">
+
+
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="@item.QuestionC" id="defaultCheck3" name="C">
+                                <label class="form-check-label" for="defaultCheck3">
+                                    @item.QuestionC
+                                </label>
+                            </div>
+
+                        </div>
+                        <div class="row">
+
+
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="@item.QuestionD" id="defaultCheck4" name="D">
+                                <label class="form-check-label" for="defaultCheck4">
+                                    @item.QuestionD
+                                </label>
+                            </div>
+
+                        </div>
+
+                        <div class="row" style="display:none">
+
+                            <input type="hidden" value="@item.QCorrectAns" name="Answer" id="Answer">
+
+                        </div>
                     </div>
-                    <br />
-                    <br />
-                    <br />
+                }
 
-                    <div class="row">
-
-
-                        <h5>@Html.RadioButtonFor(ModelItem => item.QuestionA, item.Id)@item.QuestionA</h5>
-
-                    </div>
-
-                    <div class="row">
+                <div class="row">
+                    <input type="submit" id="quiz" value="Sınavı Bitir" class="btn btn-success" />
 
 
-                        <h5>@Html.RadioButtonFor(x => item.QuestionB, item.Id)@item.QuestionB</h5>
-
-                    </div>
-                    <div class="row">
-
-
-                        <h5>@Html.RadioButtonFor(x => item.QuestionC, item.Id)@item.QuestionC</h5>
-
-                    </div>
-                    <div class="row">
-
-
-                        <h5>@Html.RadioButtonFor(x => item.QuestionD, item.Id)@item.QuestionD</h5>
-
-                    </div>
-
-                    <div class="row" style="display:none">
-
-                        @Html.TextBoxFor(x => item.QCorrectAns)
-
-                    </div>
-                     }
-
-                    <div class="row">
-                        <input type="submit" value="Sınavı Bitir" class="btn btn-success" />
-
-
-
-                    </div>
 
                 </div>
-
 
             </div>
 
 
-
         </div>
-    }
 
+
+
+    </div>
+
+    <script>
+
+
+
+
+
+
+        var asd;
+        $(document).ready(function() {
+            var model = { CourseId:$("#CourseId").val(), Questions: [] };
+            $("#quiz").click(function() {
+
+                var count = 1;
+
+                while (count != @Model.Question.Count() + 1) {
+
+                    var selector = $(`#${count}`);
+                    var id = selector.find('#QuestionId').val();
+                    var text = selector.find("#exampleFormControlTextarea1").val();
+                    var OkeyChecked;
+                    let isCheckedA = selector.find('#defaultCheck1').is(':checked');
+                    let isCheckedB = selector.find('#defaultCheck2').is(':checked');
+                    let isCheckedC = selector.find('#defaultCheck3').is(':checked');
+                    let isCheckedD = selector.find('#defaultCheck4').is(':checked');
+                    if (isCheckedA) {
+                        OkeyChecked = selector.find('#defaultCheck1').val();
+                    }
+                    else if (isCheckedB) {
+                        OkeyChecked = selector.find('#defaultCheck2').val();
+                    }
+                    else if (isCheckedC) {
+                        OkeyChecked = selector.find('#defaultCheck3').val();
+                    }
+                    else if (isCheckedD) {
+                        OkeyChecked = selector.find('#defaultCheck4').val();
+                    }
+                    var Answer = selector.find('#Answer').val();
+
+                    model.Questions.push({ QuestionId: id, Text: text, OkeyQuestion: OkeyChecked, Answer: Answer });
+
+
+                    count = count + 1;
+                }
+
+                $.post("/Exams/StartQuiz", model, function(res) {
+                    window.location.replace(res);
+                })
+
+
+
+            });
+
+        });
+    </script>
 </body>
 </html>
 

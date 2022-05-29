@@ -2,6 +2,7 @@
 using DataAccess.Concrete;
 using DataAccess.Concrete.EntityFramework;
 using Entities.Concrete;
+using Entities.ViewModel;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -17,6 +18,11 @@ namespace OnlineExamSystem.Controllers
     [AllowAnonymous]
     public class ExamsController : Controller
     {
+        public class QuizVM
+        {
+            public List<QuizViewModel> Questions { get; set; } = new List<QuizViewModel>();
+            public int CourseId { get; set; }
+        }
         ExamManager examManager = new ExamManager(new EfExamDal());
         Context c = new Context();
         public IActionResult Index()
@@ -120,46 +126,70 @@ namespace OnlineExamSystem.Controllers
   
         public IActionResult StartQuiz(int CourseId)
         {
-
-            //if (Session["studentId"]==null)
-            //{
-            //    return RedirectToAction("ExamDashboard");
-            //}
             var question = c.Questions.Where(x => x.CourseId == CourseId).ToList();
+            StartQuizVm startQuizVm = new StartQuizVm()
+            {
+                Question = question,
+                CourseId=CourseId
+            };
+            
+              
+       
+            return View(startQuizVm);
+        }
 
        
-            return View(question);
-        }
-
         [HttpPost]
-        public IActionResult StartQuiz(Question question)
+        public IActionResult StartQuiz(QuizVM model)
         {
-            string correctans;           
-            if (question.QuestionA!=null)
+            var studentId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var Result = 0;
+            foreach (var x in model.Questions)
             {
-                correctans = "A";
+                var check = x.OkeyQuestion.Trim();
+                if (x.Answer == check)
+                {
+                    Result += 10;
+                }
             }
-            else if (question.QuestionB != null)
+            ExamResult examResult = new ExamResult()
             {
-                correctans = "B";   
-            }
-            else if (question.QuestionC != null)
-            {
-                correctans = "C";
-            }
-            else if (question.QuestionD != null)
-            {
-                correctans = "D";
-            }
+                CourseId = model.CourseId,
+                LevelQuiz = 1,
+                Score = Result,
+                UserId = Convert.ToInt32(studentId)
 
-            //if (correctans.Equals(question.QuestionA))
-            //{
-            //    TempData["score"] = Convert.ToInt32(TempData["score"]) + 1;
-            //}
-            TempData.Keep();
-        
-            return RedirectToAction("StartQuiz");
+
+            };
+            c.ExamResult.Add(examResult);
+            c.SaveChanges();
+            return Json("/Course/Index");
         }
+
+
+
+        public IActionResult ExamResult()
+        {
+            var studentId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var result = from ur in c.ExamResult
+                         join r in c.Course
+                         on ur.CourseId equals r.CourseId
+                         where ur.UserId == Convert.ToInt32(studentId)
+                         
+                         select new ExamResultVm
+                         {
+                            ClassName=r.Title,
+                            Result=ur.Score,
+                            Level=ur.LevelQuiz
+                            
+                         };
+
+
+            return View(result.ToList());
+        }
+
+
+
         public IActionResult ViewAllQuestions(int ?id, int page)
         {
             //if (Session["ad_id"]==null) 

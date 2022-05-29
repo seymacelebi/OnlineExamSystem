@@ -21,7 +21,7 @@ namespace DataAccess.Concrete
         public DbSet<Course> Course { get; set; }
         public DbSet<Exam> Exam { get; set; }
         //public DbSet<ExamQuestion> ExamQuestions { get; set; }
-        public DbSet<ExamResult> ExamResults { get; set; }
+        public DbSet<ExamResult> ExamResult { get; set; }
         
         public DbSet<Question> Questions { get; set; }
         //public DbSet<QuestionOption> QuestionOptions { get; set; }

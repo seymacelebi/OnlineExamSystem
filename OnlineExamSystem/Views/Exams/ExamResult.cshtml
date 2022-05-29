@@ -1,0 +1,37 @@
+﻿@model List<Entities.ViewModel.ExamResultVm>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Ders Adı</th>
+            <th scope="col">Sınav</th>
+
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.ClassName</td>
+                <td>
+
+                    @if (item.Level == 1)
+                    {
+                        <p>Sınav 1 </p> @item.Result
+                    }
+                    else if (item.Level == 2)
+                    {
+                        <p>Sınav 2 </p> @item.Result
+
+                    }
+
+                </td>
+
+            </tr>
+        }
+
+
+    </tbody>
+</table>

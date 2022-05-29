@@ -5,9 +5,10 @@ namespace Entities.Concrete
     public class ExamResult : IEntity
     {
         public int Id { get; set; }
-        public string UserId { get; set; }
-        public int ExamId { get; set; }
+        public int UserId { get; set; }
+        public int CourseId { get; set; }
         public int Score { get; set; }
-       // public DateTime PublishedAt { get; set; }
+        public int LevelQuiz { get; set; }
+       
     }
 }
