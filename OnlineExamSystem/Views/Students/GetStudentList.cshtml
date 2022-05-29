@@ -1,0 +1,33 @@
+﻿@using Entities.Concrete
+@model IEnumerable<User>
+@{
+    ViewData["Title"] = "GetStudentList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Get Student List</h1>
+<br />
+<link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+
+<table class="table table-bordered">
+    <tr>
+        <th>Öğrencinin Adı</th>
+        <th>Öğrencinin Soyadı</th>
+        <th>Email</th>
+        <th>Eklendiği Tarih</th>
+       
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            
+            <td>@item.FirstName</td>
+            <td>@item.LastName</td>
+            <td>@item.Email</td>
+            <td>@item.AddedAt</td>
+
+        </tr>
+    }
+</table>
+
+

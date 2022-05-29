@@ -1,5 +1,6 @@
 ﻿using Business.Abstract;
 using Business.Concrete;
+using DataAccess.Concrete;
 using DataAccess.Concrete.EntityFramework;
 using Entities.Concrete;
 using Microsoft.AspNetCore.Authorization;
@@ -16,6 +17,8 @@ namespace WebUI.Controllers
     {
         //IStudentService studentManager = new StudentManager(new EfStudentDal());
         IUserService _studentService;
+        Context c = new Context();
+
 
         public StudentsController(IUserService productService)
         {
@@ -27,10 +30,12 @@ namespace WebUI.Controllers
         }
        
         [HttpGet]
-        public IActionResult GetList()
+        [Authorize(Policy = "Ogretmen")]
+        public IActionResult GetStudentList(User Student)
         {
-            var result = _studentService.GetList();
-            return View(result);
+            List<User> list = c.Users.Where(x => x.IsStudent == Student.IsStudent).ToList();
+           
+            return View(list);
         }
         [HttpGet]
         public IActionResult AddStudent()
@@ -38,24 +43,14 @@ namespace WebUI.Controllers
             return View();
         }
         [HttpPost]
+        [Authorize(Policy = "Ogretmen")]
         public IActionResult AddStudent(User User)
         {
             _studentService.Add(User);
             return RedirectToAction("Index");
         }
-        //[HttpPost("delete")]
-        //public IActionResult Delete(Student student)
-        //{
-        //    var result = _studentService.Delete(student);
-        //    if (result.Success)
-        //    {
-        //        return Ok(result.Message);
-        //    }
-
-        //    return BadRequest(result.Message);
-        //    return RedirectToAction("Index");
-        //}
         [HttpPost("delete")]
+        [Authorize(Policy = "Ogretmen")]
         public IActionResult Delete(User student)
         {
             _studentService.Delete(student);       
