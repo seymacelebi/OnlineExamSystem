@@ -31,9 +31,9 @@ namespace WebUI.Controllers
        
         [HttpGet]
         [Authorize(Policy = "Ogretmen")]
-        public IActionResult GetStudentList(User Student)
+        public IActionResult StudentList(User Student)
         {
-            List<User> list = c.Users.Where(x => x.IsStudent == Student.IsStudent).ToList();
+            List<User> list = c.Users.Where(x => x.IsStudent == true).ToList();
            
             return View(list);
         }

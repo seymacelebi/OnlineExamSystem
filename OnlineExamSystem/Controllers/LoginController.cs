@@ -56,7 +56,7 @@ namespace WebUI.Controllers
                     var a = new ClaimsIdentity(claims, "login");
                     ClaimsPrincipal b = new ClaimsPrincipal(a);
                     await HttpContext.SignInAsync(b);
-                    return Redirect("/Course/Index");
+                    return Redirect("/Exams/Index");
 
                 }
 
