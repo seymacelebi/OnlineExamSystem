@@ -23,7 +23,7 @@
     </style>
 </head>
 <body>
-  
+
 
 
     <hr />
@@ -36,10 +36,10 @@
 
     <hr />
 
-      <div style="text-align: center; font-size: 25px;  margin-top: 0px; ">Remaining Time<span id="time">05:00</span> minutes!</div>
+    @*<div style="text-align: center; font-size: 25px;  margin-top: 0px; ">Remaining Time<span id="time">05:00</span> minutes!</div>*@
 
 
-
+    <div id="time"> minutes left !</div>
 
 
     <div class="container">
@@ -137,99 +137,128 @@
 
     <script>
 
-                //function startTimer(duration, display) {
-                //  let timer = duration;
-                //  const interval = setInterval(function() {
-                //    let minutes = parseInt(timer / 60, 10)
-                //    let seconds = parseInt(timer % 60, 10);
-                //    minutes = minutes < 10 ? "0" + minutes : minutes;
-                //    seconds = seconds < 10 ? "0" + seconds : seconds;
-                //    display.textContent = minutes + ":" + seconds;
-                //    if (timer !== 0) {
-                //      --timer;
-                //    } else if (timer == 0) {
-                //      alert('Your time has been completed.');
-                //      clearInterval(interval);
-                //    }
-                //  }, 1000);
-                //}
+        //function startTimer(duration, display) {
+        //  let timer = duration;
+        //  const interval = setInterval(function() {
+        //    let minutes = parseInt(timer / 60, 10)
+        //    let seconds = parseInt(timer % 60, 10);
+        //    minutes = minutes < 10 ? "0" + minutes : minutes;
+        //    seconds = seconds < 10 ? "0" + seconds : seconds;
+        //    display.textContent = minutes + ":" + seconds;
+        //    if (timer !== 0) {
+        //      --timer;
+        //    } else if (timer == 0) {
+        //      alert('Your time has been completed.');
+        //      clearInterval(interval);
+        //    }
+        //  }, 1000);
+        //}
 
-                //window.onload = function() {
-                //  var seconds = 5,
-                //    display = document.querySelector('#demo');
-                //  startTimer(seconds, display);
-                //};
+        //window.onload = function() {
+        //  var seconds = 5,
+        //    display = document.querySelector('#demo');
+        //  startTimer(seconds, display);
+        //};
 
-                function startTimer(duration, display) {
-            var timer = duration, minutes, seconds;
-            setInterval(function () {
-                minutes = parseInt(timer / 60, 10)
-                seconds = parseInt(timer % 60, 10);
+        //        function startTimer(duration, display) {
+        //    var timer = duration, minutes, seconds;
+        //    setInterval(function () {
+        //        minutes = parseInt(timer / 60, 10)
+        //        seconds = parseInt(timer % 60, 10);
 
-                minutes = minutes < 10 ? "0" + minutes : minutes;
-                seconds = seconds < 10 ? "0" + seconds : seconds;
+        //        minutes = minutes < 10 ? "0" + minutes : minutes;
+        //        seconds = seconds < 10 ? "0" + seconds : seconds;
 
-                display.textContent = minutes + ":" + seconds;
+        //        display.textContent = minutes + ":" + seconds;
 
-                if (--timer < 0) {
-                    timer = duration;
+        //        if (--timer < 0) {
+        //            timer = duration;
+        //        }
+        //    }, 1000);
+        //}
+
+        //window.onload = function () {
+        //    var fiveMinutes = 60 * 5,
+        //        display = document.querySelector('#time');
+        //    startTimer(fiveMinutes, display);
+        //};
+        //function startTimer(duration, display) {
+        //    let timer = duration;
+        //    const interval = setInterval(function() {
+        //        let minutes = parseInt(timer / 60, 10)
+        //        let seconds = parseInt(timer % 60, 10);
+        //        minutes = minutes < 10 ? "0" + minutes : minutes;
+        //        seconds = seconds < 10 ? "0" + seconds : seconds;
+        //        display.textContent = minutes + ":" + seconds;
+        //        if (timer !== 0) {
+        //            --timer;
+        //        } else if (timer == 0) {
+        //            alert('Your time has been completed.');
+        //            clearInterval(interval);
+        //        }
+        //    }, 1000);
+        //}
+
+
+        //setTimeout(function() {
+        //    window.location = "https://www.yazilimbilisim.net";
+        
+        //}, 3000);
+
+        var count = 30;
+        setInterval(function() {
+            count--;
+     
+            if (count === 0) {
+               window.location = "/Exams/EndExam";
+            }
+        }, 1000);
+        var asd;
+        $(document).ready(function() {
+            var model = { CourseId: $("#CourseId").val(), Questions: [] };
+            $("#quiz").click(function() {
+
+                var count = 1;
+
+                while (count != @Model.Question.Count() + 1) {
+
+                    var selector = $(`#${count}`);
+                    var id = selector.find('#QuestionId').val();
+                    var text = selector.find("#exampleFormControlTextarea1").val();
+                    var OkeyChecked;
+                    let isCheckedA = selector.find('#defaultCheck1').is(':checked');
+                    let isCheckedB = selector.find('#defaultCheck2').is(':checked');
+                    let isCheckedC = selector.find('#defaultCheck3').is(':checked');
+                    let isCheckedD = selector.find('#defaultCheck4').is(':checked');
+                    if (isCheckedA) {
+                        OkeyChecked = selector.find('#defaultCheck1').val();
+                    }
+                    else if (isCheckedB) {
+                        OkeyChecked = selector.find('#defaultCheck2').val();
+                    }
+                    else if (isCheckedC) {
+                        OkeyChecked = selector.find('#defaultCheck3').val();
+                    }
+                    else if (isCheckedD) {
+                        OkeyChecked = selector.find('#defaultCheck4').val();
+                    }
+                    var Answer = selector.find('#Answer').val();
+
+                    model.Questions.push({ QuestionId: id, Text: text, OkeyQuestion: OkeyChecked, Answer: Answer });
+
+
+                    count = count + 1;
                 }
-            }, 1000);
-        }
 
-        window.onload = function () {
-            var fiveMinutes = 60 * 5,
-                display = document.querySelector('#time');
-            startTimer(fiveMinutes, display);
-        };
-
-
-                        var asd;
-                        $(document).ready(function() {
-                            var model = { CourseId:$("#CourseId").val(), Questions: [] };
-                            $("#quiz").click(function() {
-
-                                var count = 1;
-
-                                while (count != @Model.Question.Count() + 1) {
-
-                                    var selector = $(`#${count}`);
-                                    var id = selector.find('#QuestionId').val();
-                                    var text = selector.find("#exampleFormControlTextarea1").val();
-                                    var OkeyChecked;
-                                    let isCheckedA = selector.find('#defaultCheck1').is(':checked');
-                                    let isCheckedB = selector.find('#defaultCheck2').is(':checked');
-                                    let isCheckedC = selector.find('#defaultCheck3').is(':checked');
-                                    let isCheckedD = selector.find('#defaultCheck4').is(':checked');
-                                    if (isCheckedA) {
-                                        OkeyChecked = selector.find('#defaultCheck1').val();
-                                    }
-                                    else if (isCheckedB) {
-                                        OkeyChecked = selector.find('#defaultCheck2').val();
-                                    }
-                                    else if (isCheckedC) {
-                                        OkeyChecked = selector.find('#defaultCheck3').val();
-                                    }
-                                    else if (isCheckedD) {
-                                        OkeyChecked = selector.find('#defaultCheck4').val();
-                                    }
-                                    var Answer = selector.find('#Answer').val();
-
-                                    model.Questions.push({ QuestionId: id, Text: text, OkeyQuestion: OkeyChecked, Answer: Answer });
-
-
-                                    count = count + 1;
-                                }
-
-                                $.post("/Exams/StartQuiz", model, function(res) {
-                                    window.location.replace(res);
-                                })
+                $.post("/Exams/StartQuiz", model, function(res) {
+                    window.location.replace(res);
+                })
 
 
 
-                            });
+            });
 
-                        });
+        });
     </script>
 </body>
 </html>
