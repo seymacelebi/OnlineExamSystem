@@ -188,6 +188,38 @@ namespace OnlineExamSystem.Controllers
             return View(result.ToList());
         }
 
+        public IActionResult ExamResultStudent()
+        {
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var rest = c.Course.Where(x => x.UserId == Convert.ToInt32(userId)).ToList();
+
+
+            return View(rest);
+        }
+       
+        public IActionResult ExamResultStudentScore(int CourseId)
+        {
+            
+            var result = from ur in c.ExamResult
+                         join r in c.Course
+                         on ur.CourseId equals r.CourseId
+                         join u in c.Users
+                         on ur.UserId equals u.UserId
+                         where ur.CourseId == CourseId
+
+                         select new ExamResultStudentVm
+                         {
+                             User = u.FirstName +" "+ u.LastName,
+                             Result = ur.Score,
+                             level=ur.LevelQuiz,
+
+
+                         };
+            var a = result.ToList();
+
+            return View(result.ToList());
+        }
+
 
 
         public IActionResult ViewAllQuestions(int ?id, int page)

@@ -31,6 +31,11 @@
                         <a href="/Exams/ExamResult" class="nav_link"> <i class='bx bx-bookmark nav_icon'></i> <span class="nav_name">Sınav Sonuclarım</span> </a>
 
                     }
+                            @if (this.User.IsInRole("Ogretmen"))
+                    {
+                        <a href="/Exams/ExamResultStudent" class="nav_link"> <i class='bx bx-bookmark nav_icon'></i> <span class="nav_name">Sınav Sonucları</span> </a>
+
+                    }
 
 
 
