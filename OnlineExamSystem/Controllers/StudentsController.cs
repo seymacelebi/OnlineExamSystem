@@ -42,12 +42,13 @@ namespace WebUI.Controllers
         {
             return View();
         }
+
         [HttpPost]
         [Authorize(Policy = "Ogretmen")]
         public IActionResult AddStudent(User User)
         {
             _studentService.Add(User);
-            return RedirectToAction("Index");
+            return RedirectToAction("StudentList");
         }
         [HttpPost("delete")]
         [Authorize(Policy = "Ogretmen")]
