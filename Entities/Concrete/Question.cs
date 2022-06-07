@@ -7,8 +7,7 @@ namespace Entities.Concrete
     public class Question : IEntity
     {
         [Key]
-        public int Id { get; set; }
-     
+        public int Id { get; set; }    
         public string QuestionText { get; set; }
         public string QuestionA { get; set; }
         public string QuestionB { get; set; }

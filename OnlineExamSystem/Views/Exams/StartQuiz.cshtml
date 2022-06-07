@@ -15,11 +15,43 @@
 
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
     <style>
-        demo {
-            text-align: center;
-            font-size: 60px;
-            margin-top: 0px;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
+
+        body {
+            width: 100%;
+            font: normal bold 16px/normal tahoma;
+        }
+
+        article {
+            width: 300px;
+            text-align: center;
+            background-color: #68b04d;
+            border-radius: 10px;
+            margin: 50px auto 20px;
+            padding: 5px;
+            overflow: hidden;
+            box-shadow: 3px 3px 10px #ccc;
+        }
+
+            article h3 {
+                padding: 10px;
+                color: #fff;
+            }
+
+            article .count {
+                padding: 5px;
+            }
+
+            article #timer {
+                padding: 5px;
+                color: crimson;
+                background-color: aliceblue;
+                border-radius: 2px;
+            }
     </style>
 </head>
 <body>
@@ -27,20 +59,23 @@
 
 
     <hr />
-    <h1 style="text-align:center;color:green">Welcome to Learning Innovation Academy</h1>
+    <h1 style="text-align:center;color:cornflowerblue">Welcome to Uskudar University Exam Page</h1>
 
     <hr />
 
     <hr />
-    <h1 style="text-align:center;color:green">Best of Luck:)</h1>
+    <h1 style="text-align:center;color:cornflowerblue">Best of Luck:)</h1>
 
     <hr />
 
-    @*<div style="text-align: center; font-size: 25px;  margin-top: 0px; ">Remaining Time<span id="time">05:00</span> minutes!</div>*@
+    <article class="clock" id="model3">
+        <h3></h3>
 
+        <div class="count">
+            <div id="timer"></div>
+        </div>
 
-    <div id="time"> minutes left !</div>
-
+    </article>
 
     <div class="container">
         <div class="row">
@@ -63,7 +98,7 @@
                         </div>
                         <br />
                         <br />
-                        <br />
+
 
                         <div class="row">
 
@@ -136,158 +171,121 @@
     </div>
 
     <script>
+        var h3 = document.getElementsByTagName("h3");
+        h3[0].innerHTML = "Remaining Time";
 
-                        //function startTimer(duration, display) {
-                        //  let timer = duration;
-                        //  const interval = setInterval(function() {
-                        //    let minutes = parseInt(timer / 60, 10)
-                        //    let seconds = parseInt(timer % 60, 10);
-                        //    minutes = minutes < 10 ? "0" + minutes : minutes;
-                        //    seconds = seconds < 10 ? "0" + seconds : seconds;
-                        //    display.textContent = minutes + ":" + seconds;
-                        //    if (timer !== 0) {
-                        //      --timer;
-                        //    } else if (timer == 0) {
-                        //      alert('Your time has been completed.');
-                        //      clearInterval(interval);
-                        //    }
-                        //  }, 1000);
-                        //}
+        var sec = 1800,
+            countDiv = document.getElementById("timer"),
+            secpass,
+            countDown = setInterval(function() {
+                'use strict';
 
-                        //window.onload = function() {
-                        //  var seconds = 5,
-                        //    display = document.querySelector('#demo');
-                        //  startTimer(seconds, display);
-                        //};
+                secpass();
+            }, 1000);
 
-                        //        function startTimer(duration, display) {
-                        //    var timer = duration, minutes, seconds;
-                        //    setInterval(function () {
-                        //        minutes = parseInt(timer / 60, 10)
-                        //        seconds = parseInt(timer % 60, 10);
+        function secpass() {
+            'use strict';
 
-                        //        minutes = minutes < 10 ? "0" + minutes : minutes;
-                        //        seconds = seconds < 10 ? "0" + seconds : seconds;
+            var min = Math.floor(sec / 60),
+                remSec = sec % 60;
 
-                        //        display.textContent = minutes + ":" + seconds;
+            if (remSec < 10) {
 
-                        //        if (--timer < 0) {
-                        //            timer = duration;
-                        //        }
-                        //    }, 1000);
-                        //}
+                remSec = '0' + remSec;
 
-                        //window.onload = function () {
-                        //    var fiveMinutes = 60 * 5,
-                        //        display = document.querySelector('#time');
-                        //    startTimer(fiveMinutes, display);
-                        //};
-                        //function startTimer(duration, display) {
-                        //    let timer = duration;
-                        //    const interval = setInterval(function() {
-                        //        let minutes = parseInt(timer / 60, 10)
-                        //        let seconds = parseInt(timer % 60, 10);
-                        //        minutes = minutes < 10 ? "0" + minutes : minutes;
-                        //        seconds = seconds < 10 ? "0" + seconds : seconds;
-                        //        display.textContent = minutes + ":" + seconds;
-                        //        if (timer !== 0) {
-                        //            --timer;
-                        //        } else if (timer == 0) {
-                        //            alert('Your time has been completed.');
-                        //            clearInterval(interval);
-                        //        }
-                        //    }, 1000);
-                        //}
+            }
+            if (min < 10) {
 
+                min = '0' + min;
 
-                        //setTimeout(function() {
-                        //    window.location = "https://www.yazilimbilisim.net";
+            }
+            countDiv.innerHTML = min + ":" + remSec;
 
-                        //}, 3000);
+            if (sec > 0) {
 
-                        var count = 30;
-                        setInterval(function() {
-                            count--;
+                sec = sec - 1;
 
-                            if (count === 0) {
-                               window.location = "/Exams/EndExam";
-                            }
-                        }, 1000);
-                        var asd;
-                        $(document).ready(function() {
-                            var model = { CourseId: $("#CourseId").val(), Questions: [] };
-                            $("#quiz").click(function() {
+            } else {
 
-                                var count = 1;
+                clearInterval(countDown);
 
-                                while (count != @Model.Question.Count() + 1) {
+                countDiv.innerHTML = 'Süre Bitti';
+                  window.location = "/Exams/EndExam";
 
-                                    var selector = $(`#${count}`);
-                                    var id = selector.find('#QuestionId').val();
-                                    var text = selector.find("#exampleFormControlTextarea1").val();
-                                    var OkeyChecked;
-                                    let isCheckedA = selector.find('#defaultCheck1').is(':checked');
-                                    let isCheckedB = selector.find('#defaultCheck2').is(':checked');
-                                    let isCheckedC = selector.find('#defaultCheck3').is(':checked');
-                                    let isCheckedD = selector.find('#defaultCheck4').is(':checked');
-                                    if (isCheckedA) {
-                                        OkeyChecked = selector.find('#defaultCheck1').val();
-                                    }
-                                    else if (isCheckedB) {
-                                        OkeyChecked = selector.find('#defaultCheck2').val();
-                                    }
-                                    else if (isCheckedC) {
-                                        OkeyChecked = selector.find('#defaultCheck3').val();
-                                    }
-                                    else if (isCheckedD) {
-                                        OkeyChecked = selector.find('#defaultCheck4').val();
-                                    }
-                                    var Answer = selector.find('#Answer').val();
-
-                                    model.Questions.push({ QuestionId: id, Text: text, OkeyQuestion: OkeyChecked, Answer: Answer });
-
-
-                                    count = count + 1;
-                                }
-
-                                $.post("/Exams/StartQuiz", model, function(res) {
-                                    window.location.replace(res);
-                                })
-
-
-
-                            });
-
-                        });
-                        function clickIE4(){
-                if (event.button==2){
-                alert(message);
-                return false;
-                }
-                }
-                function clickNS4(e){
-                if (document.layers||document.getElementById&&!document.all){
-                if (e.which==2||e.which==3){
-                alert(message);
-                return false;
-                }
-                }
-                }
-                if (document.layers){
-                document.captureEvents(Event.MOUSEDOWN);
-                document.onmousedown=clickNS4;
-                }
-                else if (document.all&&!document.getElementById){
-                document.onmousedown=clickIE4;
-                }
-                document.oncontextmenu=new Function("alert(message);return false")
-
-                //Backspace engelleyen kod
-        $(document).on("keydown", function (e) {
-        if (e.which === 8 &amp;&amp; !$(e.target).is("input, textarea")) {
-        e.preventDefault();
+            }
         }
+
+        var asd;
+        $(document).ready(function() {
+            var model = { CourseId: $("#CourseId").val(), Questions: [] };
+            $("#quiz").click(function() {
+
+                var count = 1;
+
+                while (count != @Model.Question.Count() + 1) {
+
+                    var selector = $(`#${count}`);
+                    var id = selector.find('#QuestionId').val();
+                    var text = selector.find("#exampleFormControlTextarea1").val();
+                    var OkeyChecked;
+                    let isCheckedA = selector.find('#defaultCheck1').is(':checked');
+                    let isCheckedB = selector.find('#defaultCheck2').is(':checked');
+                    let isCheckedC = selector.find('#defaultCheck3').is(':checked');
+                    let isCheckedD = selector.find('#defaultCheck4').is(':checked');
+                    if (isCheckedA) {
+                        OkeyChecked = selector.find('#defaultCheck1').val();
+                    }
+                    else if (isCheckedB) {
+                        OkeyChecked = selector.find('#defaultCheck2').val();
+                    }
+                    else if (isCheckedC) {
+                        OkeyChecked = selector.find('#defaultCheck3').val();
+                    }
+                    else if (isCheckedD) {
+                        OkeyChecked = selector.find('#defaultCheck4').val();
+                    }
+                    var Answer = selector.find('#Answer').val();
+
+                    model.Questions.push({ QuestionId: id, Text: text, OkeyQuestion: OkeyChecked, Answer: Answer });
+
+
+                    count = count + 1;
+                }
+
+                $.post("/Exams/StartQuiz", model, function(res) {
+                    window.location.replace(res);
+                })
+
+
+
+            });
+
         });
+
+
+        function clickIE4() {
+            if (event.button == 2) {
+                alert(message);
+                return false;
+            }
+        }
+        function clickNS4(e) {
+            if (document.layers || document.getElementById && !document.all) {
+                if (e.which == 2 || e.which == 3) {
+                    alert(message);
+                    return false;
+                }
+            }
+        }
+        if (document.layers) {
+            document.captureEvents(Event.MOUSEDOWN);
+            document.onmousedown = clickNS4;
+        }
+        else if (document.all && !document.getElementById) {
+            document.onmousedown = clickIE4;
+        }
+        document.oncontextmenu = new Function("alert(message);return false")
+
 
     </script>
 </body>
