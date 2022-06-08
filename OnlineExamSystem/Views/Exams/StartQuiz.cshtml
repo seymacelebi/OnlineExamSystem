@@ -55,7 +55,7 @@
     </style>
 </head>
 @*<body oncontextmenu="return false;">*@
-    <body>
+<body>
 
 
     <hr />
@@ -171,171 +171,183 @@
     </div>
 
     <script>
-        var h3 = document.getElementsByTagName("h3");
-        h3[0].innerHTML = "Remaining Time";
+                var h3 = document.getElementsByTagName("h3");
+                h3[0].innerHTML = "Remaining Time";
 
-        var sec = 1800,
-            countDiv = document.getElementById("timer"),
-            secpass,
-            countDown = setInterval(function() {
-                'use strict';
+                var sec = 1800,
+                    countDiv = document.getElementById("timer"),
+                    secpass,
+                    countDown = setInterval(function() {
+                        'use strict';
 
-                secpass();
-            }, 1000);
+                        secpass();
+                    }, 1000);
 
-        function secpass() {
-            'use strict';
+                function secpass() {
+                    'use strict';
 
-            var min = Math.floor(sec / 60),
-                remSec = sec % 60;
+                    var min = Math.floor(sec / 60),
+                        remSec = sec % 60;
 
-            if (remSec < 10) {
+                    if (remSec < 10) {
 
-                remSec = '0' + remSec;
+                        remSec = '0' + remSec;
 
-            }
-            if (min < 10) {
-
-                min = '0' + min;
-
-            }
-            countDiv.innerHTML = min + ":" + remSec;
-
-            if (sec > 0) {
-
-                sec = sec - 1;
-
-            } else {
-
-                clearInterval(countDown);
-
-                countDiv.innerHTML = 'Süre Bitti';
-                window.location = "/Exams/EndExam";
-
-            }
-        }
-
-        var asd;
-        $(document).ready(function() {
-            var model = { CourseId: $("#CourseId").val(), Questions: [] };
-            $("#quiz").click(function() {
-
-                var count = 1;
-
-                while (count != @Model.Question.Count() + 1) {
-
-                    var selector = $(`#${count}`);
-                    var id = selector.find('#QuestionId').val();
-                    var text = selector.find("#exampleFormControlTextarea1").val();
-                    var OkeyChecked;
-                    let isCheckedA = selector.find('#defaultCheck1').is(':checked');
-                    let isCheckedB = selector.find('#defaultCheck2').is(':checked');
-                    let isCheckedC = selector.find('#defaultCheck3').is(':checked');
-                    let isCheckedD = selector.find('#defaultCheck4').is(':checked');
-                    if (isCheckedA) {
-                        OkeyChecked = selector.find('#defaultCheck1').val();
                     }
-                    else if (isCheckedB) {
-                        OkeyChecked = selector.find('#defaultCheck2').val();
-                    }
-                    else if (isCheckedC) {
-                        OkeyChecked = selector.find('#defaultCheck3').val();
-                    }
-                    else if (isCheckedD) {
-                        OkeyChecked = selector.find('#defaultCheck4').val();
-                    }
-                    var Answer = selector.find('#Answer').val();
+                    if (min < 10) {
 
-                    model.Questions.push({ QuestionId: id, Text: text, OkeyQuestion: OkeyChecked, Answer: Answer });
+                        min = '0' + min;
 
+                    }
+                    countDiv.innerHTML = min + ":" + remSec;
 
-                    count = count + 1;
+                    if (sec > 0) {
+
+                        sec = sec - 1;
+
+                    } else {
+
+                        clearInterval(countDown);
+
+                        countDiv.innerHTML = 'Süre Bitti';
+                        window.location = "/Exams/EndExam";
+
+                    }
                 }
 
-                $.post("/Exams/StartQuiz", model, function(res) {
-                    window.location.replace(res);
-                })
+                var asd;
+                $(document).ready(function() {
+                    var model = { CourseId: $("#CourseId").val(), Questions: [] };
+                    $("#quiz").click(function() {
+
+                        var count = 1;
+
+                        while (count != @Model.Question.Count() + 1) {
+
+                            var selector = $(`#${count}`);
+                            var id = selector.find('#QuestionId').val();
+                            var text = selector.find("#exampleFormControlTextarea1").val();
+                            var OkeyChecked;
+                            let isCheckedA = selector.find('#defaultCheck1').is(':checked');
+                            let isCheckedB = selector.find('#defaultCheck2').is(':checked');
+                            let isCheckedC = selector.find('#defaultCheck3').is(':checked');
+                            let isCheckedD = selector.find('#defaultCheck4').is(':checked');
+                            if (isCheckedA) {
+                                OkeyChecked = selector.find('#defaultCheck1').val();
+                            }
+                            else if (isCheckedB) {
+                                OkeyChecked = selector.find('#defaultCheck2').val();
+                            }
+                            else if (isCheckedC) {
+                                OkeyChecked = selector.find('#defaultCheck3').val();
+                            }
+                            else if (isCheckedD) {
+                                OkeyChecked = selector.find('#defaultCheck4').val();
+                            }
+                            var Answer = selector.find('#Answer').val();
+
+                            model.Questions.push({ QuestionId: id, Text: text, OkeyQuestion: OkeyChecked, Answer: Answer });
+
+
+                            count = count + 1;
+                        }
+
+                        $.post("/Exams/StartQuiz", model, function(res) {
+                            window.location.replace(res);
+                        })
 
 
 
-            });
+                    });
 
-        });
-        // if (document.addEventListener) document.addEventListener
-        //    ('keypress', F5IptalEt, true);
+                });
+                // if (document.addEventListener) document.addEventListener
+                //    ('keypress', F5IptalEt, true);
 
-        //else if (document.attachEvent) document.attachEvent('onkeydown', F5IptalEt);
+                //else if (document.attachEvent) document.attachEvent('onkeydown', F5IptalEt);
 
-        //  else document.onkeydown = F5IptalEt;
+                //  else document.onkeydown = F5IptalEt;
 
-        //    function F5IptalEt(event) {
+                //    function F5IptalEt(event) {
 
-        //       if (!event) event = window.event;
+                //       if (!event) event = window.event;
 
-        //      if (!event) return;
+                //      if (!event) return;
 
-        //      var keyCode = event.keyCode ? event.keyCode : event.charCode;
+                //      var keyCode = event.keyCode ? event.keyCode : event.charCode;
 
-        //    //116 F5 tuşu
+                //    //116 F5 tuşu
 
-        //      if (keyCode == 116) {
+                //      if (keyCode == 116) {
 
-        //        // Standart DOM (Mozilla):
+                //        // Standart DOM (Mozilla):
 
-        //         if (event.preventDefault) event.preventDefault();
+                //         if (event.preventDefault) event.preventDefault();
 
-        //        //IE
+                //        //IE
 
-        //          if (document.all && window.event && !event.preventDefault) {
+                //          if (document.all && window.event && !event.preventDefault) {
 
-        //              event.cancelBubble = true;
+                //              event.cancelBubble = true;
 
-        //              event.returnValue = false;
+                //              event.returnValue = false;
 
-        //              event.keyCode = 0;
+                //              event.keyCode = 0;
 
 
-        //        }
+                //        }
 
-        //          alert('F5 Tuşu Malesef Yasak Kardeşim');
+                //          alert('F5 Tuşu Malesef Yasak Kardeşim');
 
-        //          return false;
+                //          return false;
 
-        //    }
+                //    }
 
-        //}
-        if (document.all) {
-            document.onkeydown = function() {
-                var key_f5 = 116; // 116 = F5
-                if (key_f5 == event.keyCode) {
-                    event.keyCode = 0;
-                    alert("F5 tuşu iptal!");
+                //}
+                //if (document.all) {
+                //    document.onkeydown = function() {
+                //        var key_f5 = 116; // 116 = F5
+                //        if (key_f5 == event.keyCode) {
+                //            event.keyCode = 0;
+                //            alert("F5 tuşu iptal!");
+                //        }
+                //        return false;
+                //    }
+                //}
+                function disableF5(e) { if ((e.which || e.keyCode) == 116) e.preventDefault(); };
+        // To disable f5
+            /* jQuery < 1.7 */
+        $(document).bind("keydown", disableF5);
+        /* OR jQuery >= 1.7 */
+        $(document).on("keydown", disableF5);
+
+        // To re-enable f5
+            /* jQuery < 1.7 */
+        $(document).unbind("keydown", disableF5);
+        /* OR jQuery >= 1.7 */
+        $(document).off("keydown", disableF5);
+                function clickIE4() {
+                    if (event.button == 2) {
+                        alert(message);
+                        return false;
+                    }
                 }
-                return false;
-            }
-        }
-        function clickIE4() {
-            if (event.button == 2) {
-                alert(message);
-                return false;
-            }
-        }
-        function clickNS4(e) {
-            if (document.layers || document.getElementById && !document.all) {
-                if (e.which == 2 || e.which == 3) {
-                    alert(message);
-                    return false;
+                function clickNS4(e) {
+                    if (document.layers || document.getElementById && !document.all) {
+                        if (e.which == 2 || e.which == 3) {
+                            alert(message);
+                            return false;
+                        }
+                    }
                 }
-            }
-        }
-        if (document.layers) {
-            document.captureEvents(Event.MOUSEDOWN);
-            document.onmousedown = clickNS4;
-        }
-        else if (document.all && !document.getElementById) {
-            document.onmousedown = clickIE4;
-        }
-        document.oncontextmenu = new Function("alert(message);return false")
+                if (document.layers) {
+                    document.captureEvents(Event.MOUSEDOWN);
+                    document.onmousedown = clickNS4;
+                }
+                else if (document.all && !document.getElementById) {
+                    document.onmousedown = clickIE4;
+                }
+                document.oncontextmenu = new Function("alert(message);return false")
 
 
     </script>
