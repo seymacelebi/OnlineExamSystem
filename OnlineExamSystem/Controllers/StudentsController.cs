@@ -33,6 +33,7 @@ namespace WebUI.Controllers
         [Authorize(Policy = "Ogretmen")]
         public IActionResult StudentList(User Student)
         {
+            //List<User> list = c.Users.Where(x => x.IsStudent == Student.IsStudent).ToList();
             List<User> list = c.Users.Where(x => x.IsStudent == true).ToList();
            
             return View(list);

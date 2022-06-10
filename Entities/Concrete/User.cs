@@ -19,6 +19,6 @@ namespace Entities.Concrete
         public string Email { get; set; }
         public string Password { get; set; }
         public bool IsStudent { get; set; }
-        public DateTime AddedAt { get; set; }
+        public DateTime? AddedAt { get; set; }
     }
 }
