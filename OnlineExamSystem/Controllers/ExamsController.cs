@@ -24,6 +24,7 @@ namespace OnlineExamSystem.Controllers
             public int CourseId { get; set; }
         }
         ExamManager examManager = new ExamManager(new EfExamDal());
+        CourseManager courseManager = new CourseManager (new EfCourseDal());
         Context c = new Context();
         public IActionResult Index()
         {
@@ -33,8 +34,10 @@ namespace OnlineExamSystem.Controllers
         [HttpGet]
         public IActionResult GetList()
         {
-            var examvalues = examManager.GetList();
-            return View(examvalues);
+            //var examvalues = examManager.GetList();
+            //return View(examvalues);
+            var coursevalues = courseManager.GetList();
+            return View(coursevalues);
         }
         
         [HttpGet]
@@ -223,23 +226,37 @@ namespace OnlineExamSystem.Controllers
             return View(result.ToList());
         }
 
+        //public IActionResult StartQuiz(int CourseId)
+        //{
+        //    var question = c.Questions.Where(x => x.CourseId == CourseId).ToList();
+        //    StartQuizVm startQuizVm = new StartQuizVm()
+        //    {
+        //        Question = question,
+        //        CourseId = CourseId
+        //    };
 
 
-        public IActionResult ViewAllQuestions(int ?id, int page)
-        {
-            //if (Session["ad_id"]==null) 
-            //{              
-            //    return RedirectToAction("tlogin");
-            //}
-            //if (id==null)
-            //{
-            //    return RedirectToAction("Dashboard");
-            //}
-            int pagesize = 15, pageIndex = 1;
+
+        //    return View(startQuizVm);
+        //}
+
+
+        //public IActionResult ViewAllQuestions(QuizVM model)
+        //{
+        //    //if (Session["ad_id"]==null) 
+        //    //{              
+        //    //    return RedirectToAction("tlogin");
+        //    //}
+        //    //if (id==null)
+        //    //{
+        //    //    return RedirectToAction("Dashboard");
+        //    //}
+        //    //int pagesize = 15, pageIndex = 1;
          
-            return View(c.Questions.Where(x => x.CourseId == 1).ToList());
+        //    //return View(c.Questions.Where(x => x.CourseId == model.CourseId).ToList());
+        //    return View();
             
-        }
+        //}
         public IActionResult EndExam(Question question)
         {
             return View();

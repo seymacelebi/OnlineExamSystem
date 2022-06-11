@@ -1,63 +1,81 @@
-﻿@model IEnumerable<Question>
+﻿@model Entities.ViewModel.StartQuizVm
 @{
     ViewData["Title"] = "ViewAllQuestions";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h1>ViewAllQuestions</h1>
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.QuestionText)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.QuestionA)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.QuestionB)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.QuestionC)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.QuestionD)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.QCorrectAns)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CourseId)
-        </th>
-        <th></th>
-    </tr>
 
-    @foreach (var item in Model)
-        {
-            <td>
-                @Html.DisplayFor(modelItem => item.QuestionText)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.QuestionA)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.QuestionB)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.QuestionC)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.QuestionD)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.QCorrectAns)
-            </td>
-            <td>
-            @Html.ActionLink("Edit", "Edit", new  {id= item.Id })
-            @Html.ActionLink("Delete", "Delete", new  {id= item.Id })
+ <div class="container">
+        <div class="row">
 
-            </td>
-        }
-</table>
+
+            <div class="col-lg-10 col-md-10 col-xs-10 col-sm-10">
+                <input type="hidden" name="CourseId" id="CourseId" value="@Model.CourseId" />
+
+                @foreach (var item in Model.Question)
+                {
+                   
+
+                        <input type="hidden" name="QuestionId" id="QuestionId" value="@item.Id" />
+                        <div class="row">
+                            <div class="form-group">
+                                <label for="exampleFormControlTextarea1">Example textarea</label>
+                                
+                                <div class="card border border border-secondary rounded">
+                                    <div class="card-body">
+                                        <h5 class="card-title"></h5>
+                                        <p class="card-text">@item.QuestionText</p>
+                                        <ul class="list-group list-group-flush">
+                                            <li class="list-group-item">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" value="@item.QuestionA" id="defaultCheck1" name="A">
+                                                    <label class="form-check-label" for="defaultCheck1">
+                                                        @item.QuestionA
+                                                    </label>
+                                                </div>
+                                            </li>
+                                            <li class="list-group-item">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" value="@item.QuestionB" id="defaultCheck2" name="B">
+                                                    <label class="form-check-label" for="defaultCheck2">
+                                                        @item.QuestionB
+                                                    </label>
+                                                </div>
+                                            </li>
+                                            <li class="list-group-item">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" value="@item.QuestionC" id="defaultCheck3" name="C">
+                                                    <label class="form-check-label" for="defaultCheck3">
+                                                        @item.QuestionC
+                                                    </label>
+                                                </div>
+                                            </li>
+                                            <li class="list-group-item">
+                                                <input type="hidden" value="@item.QCorrectAns" name="Answer" id="Answer">
+                                            </li>
+                                        </ul>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br />
+                        <br />                    
+                
+                }
+
+                <div class="d-flex justify-content-center mb-5">
+                    <input type="submit" class="btn btn-lg btn-success" id="quiz" value="Sınavı Bitir" />
+                </div>
+
+
+
+            </div>
+
+
+        </div>
+
+
+
+    </div>

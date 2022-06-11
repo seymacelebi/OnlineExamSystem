@@ -3,6 +3,7 @@ using DataAccess.Abstract;
 using Entities.Concrete;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Business.Concrete
@@ -33,7 +34,7 @@ namespace Business.Concrete
 
         public List<Course> GetById(int course)
         {
-            throw new NotImplementedException();
+            return _courseDal.GetList(x => x.CourseId == course);
         }
 
         public List<Course> GetByTitle(string course)
@@ -43,7 +44,7 @@ namespace Business.Concrete
 
         public List<Course> GetList()
         {
-            throw new NotImplementedException();
+            return _courseDal.GetList().ToList();
         }
 
         public void TransactionalOperation(Course course)

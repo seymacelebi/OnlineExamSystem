@@ -1,5 +1,5 @@
 ﻿@using Entities.Concrete
-@model List<Exam>
+@model List<Course>
 @{
     ViewData["Title"] = "GetList";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -11,20 +11,14 @@
 <table class="table table-bordered">
     <tr>
         <th>Title</th>
-        <th>Information</th>
-        <th>Number of Question</th>
-        <th>Start Time</th>
-        <th>End Time</th>
+        <th>Sınav Adı</th>    
     </tr>
     @foreach (var item in Model)
     {
         <tr>
             <td>@item.Title</td>
-            <td>@item.Information</td>
-            <td>@item.NumberOfQuestion</td>
-            <td>@item.StartTime</td>
-            <td>@item.EndTime</td>
-            <td><a href="/Exams/ViewAllQuestions" class="btn btn-info">Sınav Sorularını Görüntüle</a></td>
+            
+            <td><a href="/Exams/ViewAllQuestions?CourseId=@item.CourseId" class="btn btn-info">Sınav Sorularını Görüntüle</a></td>
             <td><a href="/Exams/AddQuestions" class="btn btn-info">Sınav Sorusu Ekle</a></td>
         </tr>
     }

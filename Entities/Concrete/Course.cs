@@ -10,7 +10,7 @@ namespace Entities.Concrete
     {
         [Key]
         public int CourseId { get; set; }
-        public string Title { get; set; }
+        public string? Title { get; set; }
         public DateTime AddedAt { get; set; }
         public bool check { get; set; }
         public int UserId { get; set; }

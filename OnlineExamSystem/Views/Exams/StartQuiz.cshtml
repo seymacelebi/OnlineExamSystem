@@ -15,342 +15,342 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
 
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
-    
+
 </head>*@
 @*<body oncontextmenu="return false;">*@
 @*<body>*@
 
 
 
-    <h1 style="text-align:center;color:cornflowerblue">Welcome to Uskudar University Exam Page</h1>
+<h1 style="text-align:center;color:cornflowerblue">Welcome to Uskudar University Exam Page</h1>
 
 
 
-    <article class="clock" id="model3">
-        <h3></h3>
+<article class="clock" id="model3">
+    <h3></h3>
 
-        <div class="count">
-            <div id="timer"></div>
-        </div>
+    <div class="count">
+        <div id="timer"></div>
+    </div>
 
-    </article>
+</article>
 
-    <div class="container">
-        <div class="row">
+<div class="container">
+    <div class="row">
 
 
-            <div class="col-lg-10 col-md-10 col-xs-10 col-sm-10">
-                <input type="hidden" name="CourseId" id="CourseId" value="@Model.CourseId" />
+        <div class="col-lg-10 col-md-10 col-xs-10 col-sm-10">
+            <input type="hidden" name="CourseId" id="CourseId" value="@Model.CourseId" />
 
-                @foreach (var item in Model.Question)
-                {
-                    count = count + 1;
-                    <div id="@count">
+            @foreach (var item in Model.Question)
+            {
+                count = count + 1;
+                <div id="@count">
 
-                        <input type="hidden" name="QuestionId" id="QuestionId" value="@item.Id" />
-                        <div class="row">
-                            <div class="form-group">
-                                <label for="exampleFormControlTextarea1">Example textarea</label>
-                                
-                                <div class="card border border border-secondary rounded">
-                                    <div class="card-body">
-                                        <h5 class="card-title"></h5>
-                                        <p class="card-text">@item.QuestionText</p>
-                                        <ul class="list-group list-group-flush">
-                                            <li class="list-group-item">
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="radio" value="@item.QuestionA" id="defaultCheck1" name="A">
-                                                    <label class="form-check-label" for="defaultCheck1">
-                                                        @item.QuestionA
-                                                    </label>
-                                                </div>
-                                            </li>
-                                            <li class="list-group-item">
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="radio" value="@item.QuestionB" id="defaultCheck2" name="B">
-                                                    <label class="form-check-label" for="defaultCheck2">
-                                                        @item.QuestionB
-                                                    </label>
-                                                </div>
-                                            </li>
-                                            <li class="list-group-item">
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="radio" value="@item.QuestionC" id="defaultCheck3" name="C">
-                                                    <label class="form-check-label" for="defaultCheck3">
-                                                        @item.QuestionC
-                                                    </label>
-                                                </div>
-                                            </li>
-                                            <li class="list-group-item">
-                                                <input type="hidden" value="@item.QCorrectAns" name="Answer" id="Answer">
-                                            </li>
-                                        </ul>
+                    <input type="hidden" name="QuestionId" id="QuestionId" value="@item.Id" />
+                    <div class="row">
+                        <div class="form-group">
+                            <label for="exampleFormControlTextarea1">Example textarea</label>
 
-                                    </div>
+                            <div class="card border border border-secondary rounded">
+                                <div class="card-body">
+                                    <h5 class="card-title"></h5>
+                                    <p class="card-text">@item.QuestionText</p>
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" value="@item.QuestionA" id="defaultCheck1" name="A">
+                                                <label class="form-check-label" for="defaultCheck1">
+                                                    @item.QuestionA
+                                                </label>
+                                            </div>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" value="@item.QuestionB" id="defaultCheck2" name="B">
+                                                <label class="form-check-label" for="defaultCheck2">
+                                                    @item.QuestionB
+                                                </label>
+                                            </div>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" value="@item.QuestionC" id="defaultCheck3" name="C">
+                                                <label class="form-check-label" for="defaultCheck3">
+                                                    @item.QuestionC
+                                                </label>
+                                            </div>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <input type="hidden" value="@item.QCorrectAns" name="Answer" id="Answer">
+                                        </li>
+                                    </ul>
+
                                 </div>
                             </div>
                         </div>
-                        <br />
-                        <br />
-
-
-                        @* <div class="row">
-
-
-                    <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="@item.QuestionA" id="defaultCheck1" name="A">
-                    <label class="form-check-label" for="defaultCheck1">
-                    @item.QuestionA
-                    </label>
                     </div>
-
-                    </div>
-
-                    <div class="row">
+                    <br />
+                    <br />
 
 
-                    <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="@item.QuestionB" id="defaultCheck2" name="B">
-                    <label class="form-check-label" for="defaultCheck2">
-                    @item.QuestionB
-                    </label>
-                    </div>
-
-                    </div>
-                    <div class="row">
+                    @* <div class="row">
 
 
-                    <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="@item.QuestionC" id="defaultCheck3" name="C">
-                    <label class="form-check-label" for="defaultCheck3">
-                    @item.QuestionC
-                    </label>
-                    </div>
-
-                    </div>
-                    <div class="row">
-
-
-                    <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="@item.QuestionD" id="defaultCheck4" name="D">
-                    <label class="form-check-label" for="defaultCheck4">
-                    @item.QuestionD
-                    </label>
-                    </div>
-
-                    </div>
-
-                    <div class="row" style="display:none">
-
-                    <input type="hidden" value="@item.QCorrectAns" name="Answer" id="Answer">
-
-                    </div>*@
-                    </div>
-                }
-
-                <div class="d-flex justify-content-center mb-5">
-                    <input type="submit" class="btn btn-lg btn-success" id="quiz" value="Sınavı Bitir" />
+                <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="@item.QuestionA" id="defaultCheck1" name="A">
+                <label class="form-check-label" for="defaultCheck1">
+                @item.QuestionA
+                </label>
                 </div>
 
+                </div>
+
+                <div class="row">
 
 
+                <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="@item.QuestionB" id="defaultCheck2" name="B">
+                <label class="form-check-label" for="defaultCheck2">
+                @item.QuestionB
+                </label>
+                </div>
+
+                </div>
+                <div class="row">
+
+
+                <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="@item.QuestionC" id="defaultCheck3" name="C">
+                <label class="form-check-label" for="defaultCheck3">
+                @item.QuestionC
+                </label>
+                </div>
+
+                </div>
+                <div class="row">
+
+
+                <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="@item.QuestionD" id="defaultCheck4" name="D">
+                <label class="form-check-label" for="defaultCheck4">
+                @item.QuestionD
+                </label>
+                </div>
+
+                </div>
+
+                <div class="row" style="display:none">
+
+                <input type="hidden" value="@item.QCorrectAns" name="Answer" id="Answer">
+
+                </div>*@
+                </div>
+            }
+
+            <div class="d-flex justify-content-center mb-5">
+                <input type="submit" class="btn btn-lg btn-success" id="quiz" value="Sınavı Bitir" />
             </div>
 
 
-        </div>
 
+        </div>
 
 
     </div>
 
-    <script>
-        var h3 = document.getElementsByTagName("h3");
-        h3[0].innerHTML = "Remaining Time";
 
-        var sec = 1800,
-            countDiv = document.getElementById("timer"),
-            secpass,
-            countDown = setInterval(function() {
-                'use strict';
 
-                secpass();
-            }, 1000);
+</div>
 
-        function secpass() {
+<script>
+    var h3 = document.getElementsByTagName("h3");
+    h3[0].innerHTML = "Remaining Time";
+
+    var sec = 1800,
+        countDiv = document.getElementById("timer"),
+        secpass,
+        countDown = setInterval(function() {
             'use strict';
 
-            var min = Math.floor(sec / 60),
-                remSec = sec % 60;
+            secpass();
+        }, 1000);
 
-            if (remSec < 10) {
+    function secpass() {
+        'use strict';
 
-                remSec = '0' + remSec;
+        var min = Math.floor(sec / 60),
+            remSec = sec % 60;
 
-            }
-            if (min < 10) {
+        if (remSec < 10) {
 
-                min = '0' + min;
+            remSec = '0' + remSec;
 
-            }
-            countDiv.innerHTML = min + ":" + remSec;
-
-            if (sec > 0) {
-
-                sec = sec - 1;
-
-            } else {
-
-                clearInterval(countDown);
-
-                countDiv.innerHTML = 'Süre Bitti';
-                window.location = "/Exams/EndExam";
-
-            }
         }
+        if (min < 10) {
 
-        var asd;
-        $(document).ready(function() {
-            var model = { CourseId: $("#CourseId").val(), Questions: [] };
-            $("#quiz").click(function() {
+            min = '0' + min;
 
-                var count = 1;
+        }
+        countDiv.innerHTML = min + ":" + remSec;
 
-                while (count != @Model.Question.Count() + 1) {
+        if (sec > 0) {
 
-                    var selector = $(`#${count}`);
-                    var id = selector.find('#QuestionId').val();
-                    var text = selector.find("#exampleFormControlTextarea1").val();
-                    var OkeyChecked;
-                    let isCheckedA = selector.find('#defaultCheck1').is(':checked');
-                    let isCheckedB = selector.find('#defaultCheck2').is(':checked');
-                    let isCheckedC = selector.find('#defaultCheck3').is(':checked');
-                    let isCheckedD = selector.find('#defaultCheck4').is(':checked');
-                    if (isCheckedA) {
-                        OkeyChecked = selector.find('#defaultCheck1').val();
-                    }
-                    else if (isCheckedB) {
-                        OkeyChecked = selector.find('#defaultCheck2').val();
-                    }
-                    else if (isCheckedC) {
-                        OkeyChecked = selector.find('#defaultCheck3').val();
-                    }
-                    else if (isCheckedD) {
-                        OkeyChecked = selector.find('#defaultCheck4').val();
-                    }
-                    var Answer = selector.find('#Answer').val();
+            sec = sec - 1;
 
-                    model.Questions.push({ QuestionId: id, Text: text, OkeyQuestion: OkeyChecked, Answer: Answer });
+        } else {
 
+            clearInterval(countDown);
 
-                    count = count + 1;
+            countDiv.innerHTML = 'Süre Bitti';
+            window.location = "/Exams/EndExam";
+
+        }
+    }
+
+    var asd;
+    $(document).ready(function() {
+        var model = { CourseId: $("#CourseId").val(), Questions: [] };
+        $("#quiz").click(function() {
+
+            var count = 1;
+
+            while (count != @Model.Question.Count() + 1) {
+
+                var selector = $(`#${count}`);
+                var id = selector.find('#QuestionId').val();
+                var text = selector.find("#exampleFormControlTextarea1").val();
+                var OkeyChecked;
+                let isCheckedA = selector.find('#defaultCheck1').is(':checked');
+                let isCheckedB = selector.find('#defaultCheck2').is(':checked');
+                let isCheckedC = selector.find('#defaultCheck3').is(':checked');
+                let isCheckedD = selector.find('#defaultCheck4').is(':checked');
+                if (isCheckedA) {
+                    OkeyChecked = selector.find('#defaultCheck1').val();
                 }
+                else if (isCheckedB) {
+                    OkeyChecked = selector.find('#defaultCheck2').val();
+                }
+                else if (isCheckedC) {
+                    OkeyChecked = selector.find('#defaultCheck3').val();
+                }
+                else if (isCheckedD) {
+                    OkeyChecked = selector.find('#defaultCheck4').val();
+                }
+                var Answer = selector.find('#Answer').val();
 
-                $.post("/Exams/StartQuiz", model, function(res) {
-                    window.location.replace(res);
-                })
+                model.Questions.push({ QuestionId: id, Text: text, OkeyQuestion: OkeyChecked, Answer: Answer });
 
 
+                count = count + 1;
+            }
 
-            });
+            $.post("/Exams/StartQuiz", model, function(res) {
+                window.location.replace(res);
+            })
+
+
 
         });
-                                                                        // if (document.addEventListener) document.addEventListener
-                                                                        //    ('keypress', F5IptalEt, true);
 
-                                                                        //else if (document.attachEvent) document.attachEvent('onkeydown', F5IptalEt);
+    });
+                                                                            // if (document.addEventListener) document.addEventListener
+                                                                            //    ('keypress', F5IptalEt, true);
 
-                                                                        //  else document.onkeydown = F5IptalEt;
+                                                                            //else if (document.attachEvent) document.attachEvent('onkeydown', F5IptalEt);
 
-                                                                        //    function F5IptalEt(event) {
+                                                                            //  else document.onkeydown = F5IptalEt;
 
-                                                                        //       if (!event) event = window.event;
+                                                                            //    function F5IptalEt(event) {
 
-                                                                        //      if (!event) return;
+                                                                            //       if (!event) event = window.event;
 
-                                                                        //      var keyCode = event.keyCode ? event.keyCode : event.charCode;
+                                                                            //      if (!event) return;
 
-                                                                        //    //116 F5 tuşu
+                                                                            //      var keyCode = event.keyCode ? event.keyCode : event.charCode;
 
-                                                                        //      if (keyCode == 116) {
+                                                                            //    //116 F5 tuşu
 
-                                                                        //        // Standart DOM (Mozilla):
+                                                                            //      if (keyCode == 116) {
 
-                                                                        //         if (event.preventDefault) event.preventDefault();
+                                                                            //        // Standart DOM (Mozilla):
 
-                                                                        //        //IE
+                                                                            //         if (event.preventDefault) event.preventDefault();
 
-                                                                        //          if (document.all && window.event && !event.preventDefault) {
+                                                                            //        //IE
 
-                                                                        //              event.cancelBubble = true;
+                                                                            //          if (document.all && window.event && !event.preventDefault) {
 
-                                                                        //              event.returnValue = false;
+                                                                            //              event.cancelBubble = true;
 
-                                                                        //              event.keyCode = 0;
+                                                                            //              event.returnValue = false;
 
-
-                                                                        //        }
-
-                                                                        //          alert('F5 Tuşu Malesef Yasak Kardeşim');
-
-                                                                        //          return false;
-
-                                                                        //    }
-
-                                                                        //}
-                                                                        //if (document.all) {
-                                                                        //    document.onkeydown = function() {
-                                                                        //        var key_f5 = 116; // 116 = F5
-                                                                        //        if (key_f5 == event.keyCode) {
-                                                                        //            event.keyCode = 0;
-                                                                        //            alert("F5 tuşu iptal!");
-                                                                        //        }
-                                                                        //        return false;
-                                                                        //    }
-                                                                        //}
+                                                                            //              event.keyCode = 0;
 
 
+                                                                            //        }
+
+                                                                            //          alert('F5 Tuşu Malesef Yasak Kardeşim');
+
+                                                                            //          return false;
+
+                                                                            //    }
+
+                                                                            //}
+                                                                            //if (document.all) {
+                                                                            //    document.onkeydown = function() {
+                                                                            //        var key_f5 = 116; // 116 = F5
+                                                                            //        if (key_f5 == event.keyCode) {
+                                                                            //            event.keyCode = 0;
+                                                                            //            alert("F5 tuşu iptal!");
+                                                                            //        }
+                                                                            //        return false;
+                                                                            //    }
+                                                                            //}
 
 
-    </script>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+
+
+</script>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        width: 100%;
+        font: normal bold 16px/normal tahoma;
+    }
+
+    article {
+        width: 300px;
+        text-align: center;
+        background-color: #68b04d;
+        border-radius: 10px;
+        margin: 50px auto 20px;
+        padding: 5px;
+        overflow: hidden;
+        box-shadow: 3px 3px 10px #ccc;
+    }
+
+        article h3 {
+            padding: 10px;
+            color: #fff;
         }
 
-        body {
-            width: 100%;
-            font: normal bold 16px/normal tahoma;
-        }
-
-        article {
-            width: 300px;
-            text-align: center;
-            background-color: #68b04d;
-            border-radius: 10px;
-            margin: 50px auto 20px;
+        article .count {
             padding: 5px;
-            overflow: hidden;
-            box-shadow: 3px 3px 10px #ccc;
         }
 
-            article h3 {
-                padding: 10px;
-                color: #fff;
-            }
-
-            article .count {
-                padding: 5px;
-            }
-
-            article #timer {
-                padding: 5px;
-                color: crimson;
-                background-color: aliceblue;
-                border-radius: 2px;
-            }
-    </style>
+        article #timer {
+            padding: 5px;
+            color: crimson;
+            background-color: aliceblue;
+            border-radius: 2px;
+        }
+</style>
 @*</body>
 </html>
 
