@@ -12,7 +12,7 @@ namespace Entities.Concrete
         public int CourseId { get; set; }
         public string Title { get; set; }
         public DateTime AddedAt { get; set; }
-
+        public bool check { get; set; }
         public int UserId { get; set; }
     }
 }

@@ -161,6 +161,9 @@ namespace OnlineExamSystem.Controllers
 
 
             };
+            var course = c.Course.Where(x => x.CourseId == model.CourseId).FirstOrDefault();
+            course.check = true;
+            c.Course.Update(course);
             c.ExamResult.Add(examResult);
             c.SaveChanges();
             return Json("/Course/Index");

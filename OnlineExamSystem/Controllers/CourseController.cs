@@ -27,7 +27,7 @@ namespace OnlineExamSystem.Controllers
                             UserId = Convert.ToInt32(userId),
                             Title=r.Title,
                             AddedAt=r.AddedAt,
-                            
+                            check=r.check
                          };
           
             return View(result.ToList());

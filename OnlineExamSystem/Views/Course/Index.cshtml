@@ -30,14 +30,18 @@
 
             }
         }
-        else
+        else 
         {
             foreach (var x in Model)
             {
                 <tr>
                     <th scope="row">@x.CourseId</th>
                     <td>@x.Title</td>
-                    <td><a href="/Exams/StartQuiz?CourseId=@x.CourseId">Sınav </a></td>
+                    <td>@if (x.check == false)
+                        {
+                            <a href="/Exams/StartQuiz?CourseId=@x.CourseId">Sınav </a>
+                        }
+                        </td>
                     <td><a href="#"></a></td>
                 </tr>
 
