@@ -36,6 +36,7 @@ namespace OnlineExamSystem.Controllers
         {
             //var examvalues = examManager.GetList();
             //return View(examvalues);
+            //List<User> list = c.Users.Where(x => x.UserId==  ).ToList();
             var coursevalues = courseManager.GetList();
             return View(coursevalues);
         }

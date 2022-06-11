@@ -3,6 +3,8 @@
     ViewData["Title"] = "AddQuestions";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<br/><br/>
+
 <form asp-action="AddQuestions" asp-controller="Exams" method="post">
     <input type="hidden" name="CourseId" value="@Model"/>
     <div class="form-group">
