@@ -18,5 +18,7 @@ namespace Entities.Concrete
         public DateTime AddedAt { get; set; }
         public DateTime StartTime { get; set; }
         public DateTime EndTime { get; set; }
+        public virtual Course Course { get; set; }
+        public int CourseId { get; set; }
     }
 }

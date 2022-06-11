@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -70,6 +71,43 @@ namespace WebUI.Controllers
 
                 return View();
             }
+        }
+        [AllowAnonymous]
+        public IActionResult ForgotPassword()
+        {
+            return View();
+        }
+
+        //[HttpPost]
+        //[AllowAnonymous]
+        //public async Task<IActionResult> ForgotPassword([Required] string email)
+        //{
+        //    if (!ModelState.IsValid)
+        //        return View(email);
+
+        //    var user = await userManager.FindByEmailAsync(email);
+        //    if (user == null)
+        //        return RedirectToAction(nameof(ForgotPasswordConfirmation));
+
+        //    var token = await userManager.GeneratePasswordResetTokenAsync(user);
+        //    var link = Url.Action("ResetPassword", "Account", new { token, email = user.Email }, Request.Scheme);
+
+        //    EmailHelper emailHelper = new EmailHelper();
+        //    bool emailResponse = emailHelper.SendEmailPasswordReset(user.Email, link);
+
+        //    if (emailResponse)
+        //        return RedirectToAction("ForgotPasswordConfirmation");
+        //    else
+        //    {
+        //        // log email failed 
+        //    }
+        //    return View(email);
+        //}
+
+        [AllowAnonymous]
+        public IActionResult ForgotPasswordConfirmation()
+        {
+            return View();
         }
         public async Task<IActionResult> LogOut()
         {
