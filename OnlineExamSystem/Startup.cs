@@ -58,6 +58,7 @@ namespace OnlineExamSystem
                 
                 );
             services.AddAuthorization(x => x.AddPolicy("Ogretmen", policy => policy.RequireClaim("Ogretmen", "Ogretmen")));
+            services.AddAuthorization(x => x.AddPolicy("Admin", policy => policy.RequireClaim("Admin", "Admin")));
             //[Authorize(Policy = "Admin")]
         }
 

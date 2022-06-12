@@ -31,6 +31,7 @@ namespace WebUI.Controllers
        
         [HttpGet]
         [Authorize(Policy = "Ogretmen")]
+        //[Authorize(Policy = "Admin")]
         public IActionResult StudentList(User Student)
         {
             //List<User> list = c.Users.Where(x => x.IsStudent == Student.IsStudent).ToList();

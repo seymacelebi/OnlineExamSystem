@@ -32,11 +32,10 @@ namespace OnlineExamSystem.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetList()
+        [Authorize(Policy = "Ogretmen")]
+        public IActionResult GetList(int UserId)
         {
-            //var examvalues = examManager.GetList();
-            //return View(examvalues);
-            //List<User> list = c.Users.Where(x => x.UserId==  ).ToList();
+            var course = c.Users.Where(x => x.UserId == UserId).ToList();
             var coursevalues = courseManager.GetList();
             return View(coursevalues);
         }
