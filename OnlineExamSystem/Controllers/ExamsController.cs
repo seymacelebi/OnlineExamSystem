@@ -39,6 +39,7 @@ namespace OnlineExamSystem.Controllers
             var coursevalues = courseManager.GetList();
             return View(coursevalues);
         }
+
         
         [HttpGet]
         [Authorize(Policy = "Ogretmen")]
@@ -239,7 +240,19 @@ namespace OnlineExamSystem.Controllers
 
         //    return View(startQuizVm);
         //}
+        public IActionResult ViewAllQuestions(int CourseId)
+        {
+            var question = c.Questions.Where(x => x.CourseId == CourseId).ToList();
+            StartQuizVm startQuizVm = new StartQuizVm()
+            {
+                Question = question,
+                CourseId = CourseId
+            };
 
+
+
+            return View(startQuizVm);
+        }
 
         //public IActionResult ViewAllQuestions(QuizVM model)
         //{
@@ -252,10 +265,10 @@ namespace OnlineExamSystem.Controllers
         //    //    return RedirectToAction("Dashboard");
         //    //}
         //    //int pagesize = 15, pageIndex = 1;
-         
+
         //    //return View(c.Questions.Where(x => x.CourseId == model.CourseId).ToList());
         //    return View();
-            
+
         //}
         public IActionResult EndExam(Question question)
         {
