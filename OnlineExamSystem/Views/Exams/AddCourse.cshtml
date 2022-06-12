@@ -4,14 +4,15 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1 style="text-align:center; background-color:gray"> Add Course</h1>
+<h1 style="text-align:center; background-color:gray"> Ders Ekleme Sayfası</h1>
+
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
 
     <div class="form-control">
         <h4>Course</h4>
-        <hr/>
+        <hr />
         @Html.ValidationSummary(true, "", new {@class = "text-danger"})
         <div class="form-group">
             @Html.LabelFor(model=>model.Title, htmlAttributes:new {@class = "control-label col-md-2"})
@@ -20,6 +21,7 @@
                 @Html.ValidationMessageFor(model=>model.Title, "", new {@class = "text-danger"})
             </div>
         </div>
+        <hr>
 
         <div class="form-group">
             <div class="col-md-10">
@@ -29,3 +31,24 @@
     </div>
 }
 
+
+@*<div class="container">
+    <div class="row">
+        <div class="col-lg-10 col-md-10 col-xs-10 col-sm-10">
+
+            <div class="card border border border-secondary rounded">
+                <div class="card-body">
+                    <h5 class="card-title">Ders Adı: </h5>
+                    <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                </div>
+
+            </div>
+            <br />
+            <br />
+            <div class="d-flex justify-content-center mb-5">
+                <input type="submit" class="btn btn-lg btn-success" id="quiz" value="Sınavı Bitir" />
+            </div>
+
+        </div>
+    </div>
+</div>*@

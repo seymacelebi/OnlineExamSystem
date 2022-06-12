@@ -10,8 +10,9 @@
 <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
 <table class="table table-bordered">
     <tr>
-        <th>Title</th>
         <th>Sınav Adı</th>    
+        <th>Sınav </th>    
+        <th>Soruları </th>    
     </tr>
     @foreach (var item in Model)
     {
@@ -19,7 +20,7 @@
             <td>@item.Title</td>
             
             <td><a href="/Exams/ViewAllQuestions?CourseId=@item.CourseId" class="btn btn-info">Sınav Sorularını Görüntüle</a></td>
-            <td><a href="/Exams/AddQuestions" class="btn btn-info">Sınav Sorusu Ekle</a></td>
+            <td><a href="/Exams/AddQuestions?CourseId=@item.CourseId" class="btn btn-info">Sınav Sorusu Girmek İçin Tıklayınız</a></td>
         </tr>
     }
 </table>

@@ -2,8 +2,10 @@
 using DataAccess.Concrete;
 using DataAccess.Concrete.EntityFramework;
 using Entities.Concrete;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 
@@ -32,18 +34,8 @@ namespace OnlineExamSystem.Controllers
           
             return View(result.ToList());
         }
-        //[HttpGet]
-        //public ActionResult AddCourse()
-        //{
-        //    return View();
-        //}
-        //[HttpPost]
-        //public IActionResult AddCourse(int courseId)
-        //{
-        //    var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-        //    return View();
-        //}
 
+       
 
     }
 }
