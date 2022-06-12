@@ -2,11 +2,13 @@ using Business.Abstract;
 using Business.Concrete;
 using DataAccess.Abstract;
 using DataAccess.Concrete.EntityFramework;
+using Entities.Concrete;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -30,6 +32,23 @@ namespace OnlineExamSystem
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddIdentity<AppUser, AppRole>(_ =>
+            {
+                _.Password.RequiredLength = 5; //En az kaç karakterli olmasý gerektiðini belirtiyoruz.
+                _.Password.RequireNonAlphanumeric = false; //Alfanumerik zorunluluðunu kaldýrýyoruz.
+                _.Password.RequireLowercase = false; //Küçük harf zorunluluðunu kaldýrýyoruz.
+                _.Password.RequireUppercase = false; //Büyük harf zorunluluðunu kaldýrýyoruz.
+                _.Password.RequireDigit = false; //0-9 arasý sayýsal karakter zorunluluðunu kaldýrýyoruz.
+
+                _.User.RequireUniqueEmail = true; //Email adreslerini tekilleþtiriyoruz.
+                _.User.AllowedUserNameCharacters = "abcçdefghiýjklmnoöpqrsþtuüvwxyzABCÇDEFGHIÝJKLMNOÖPQRSÞTUÜVWXYZ0123456789-._@+"; //Kullanýcý adýnda geçerli olan karakterleri belirtiyoruz.
+            })
+           //.AddPasswordValidator<CustomPasswordValidation>()
+         //.AddUserValidator<CustomUserValidation>()
+         //.AddErrorDescriber<CustomIdentityErrorDescriber>().AddEntityFrameworkStores<AppDbContext>()
+         .AddDefaultTokenProviders();
+
+
             services.AddControllersWithViews();
             services.AddSession();
             //services.AddSession(option =>
@@ -53,9 +72,9 @@ namespace OnlineExamSystem
                 .AddCookie(x =>
                 {
                     x.LoginPath = "/Login/Index";
-                   
+
                 }
-                
+
                 );
             services.AddAuthorization(x => x.AddPolicy("Ogretmen", policy => policy.RequireClaim("Ogretmen", "Ogretmen")));
             services.AddAuthorization(x => x.AddPolicy("Admin", policy => policy.RequireClaim("Admin", "Admin")));
