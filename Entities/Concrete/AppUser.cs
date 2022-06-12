@@ -5,9 +5,7 @@ using System.Text;
 
 namespace Entities.Concrete
 {
-    public class AppUser : IdentityUser<int>
+    public class AppUser : IdentityUser
     {
-        public string Surname { get; set; }
-        public string ImageUrl { get; set; }
     }
 }

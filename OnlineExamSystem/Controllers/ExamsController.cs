@@ -253,6 +253,24 @@ namespace OnlineExamSystem.Controllers
 
             return View(startQuizVm);
         }
+        [HttpPost]
+        public IActionResult ViewAllQuestions(Question question)
+        {
+
+            Question q = new Question();
+            q.QuestionText = question.QuestionText;
+            q.QuestionA = question.QuestionA;
+            q.QuestionB = question.QuestionB;
+            q.QuestionC = question.QuestionC;
+            q.QuestionD = question.QuestionD;
+            q.QCorrectAns = question.QCorrectAns;
+
+            q.CourseId = question.CourseId;
+            c.Questions.Update(q);
+            c.SaveChanges();
+
+            return View();
+        }
 
         //public IActionResult ViewAllQuestions(QuizVM model)
         //{

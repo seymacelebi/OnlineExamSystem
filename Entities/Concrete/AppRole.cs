@@ -5,9 +5,9 @@ using System.Text;
 
 namespace Entities.Concrete
 {
-    public class AppRole : IdentityRole<int>
+    public class AppRole : IdentityRole
     {
-        public DateTime CreatedDate { get; set; }
+        public DateTime OlusturulmaTarihi { get; set; }
     }
 
 }

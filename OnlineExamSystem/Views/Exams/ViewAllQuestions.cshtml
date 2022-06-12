@@ -4,73 +4,83 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>ViewAllQuestions</h1>
+<div class="d-flex justify-content-center mb-5">
+    <h4>Bütün Soruları Görüntüle</h4>
+</div>
 
- <div class="container">
-        <div class="row">
+<div class="container">
+    <div class="row">
+
+        <form asp-action="AddQuestions" asp-controller="Exams" method="post">
+        <div class="col-lg-10 col-md-10 col-xs-10 col-sm-10">
+            <input type="hidden" name="CourseId" id="CourseId" value="@Model.CourseId" />
+
+            @foreach (var item in Model.Question)
+            {
 
 
-            <div class="col-lg-10 col-md-10 col-xs-10 col-sm-10">
-                <input type="hidden" name="CourseId" id="CourseId" value="@Model.CourseId" />
+                <input type="hidden" name="QuestionId" id="QuestionId" value="@item.Id" />
+                <div class="row">
+                    <div class="form-group">
+                        <label for="exampleFormControlTextarea1">Soru : @item.Id</label>
 
-                @foreach (var item in Model.Question)
-                {
-                   
+                        <div class="card border border border-secondary rounded">
+                            <div class="card-body">
+                                <h5 class="card-title"></h5>
+                                @*<p class="card-text">@item.QuestionText</p>*@
+                                <textarea id="w3review" name="QuestionText" rows="4" cols="135">@item.QuestionText</textarea>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" value="@item.QuestionA" id="defaultCheck1" name="A">
+                                            @*  <label class="form-check-label" for="defaultCheck1">
+                                        @item.QuestionA
+                                        </label>*@
+                                            <input type="text" class="form-control" id="QuestionA" name="QuestionA" placeholder=" @item.QuestionA" width="40">
 
-                        <input type="hidden" name="QuestionId" id="QuestionId" value="@item.Id" />
-                        <div class="row">
-                            <div class="form-group">
-                                <label for="exampleFormControlTextarea1">Example textarea</label>
-                                
-                                <div class="card border border border-secondary rounded">
-                                    <div class="card-body">
-                                        <h5 class="card-title"></h5>
-                                        <p class="card-text">@item.QuestionText</p>
-                                        <ul class="list-group list-group-flush">
-                                            <li class="list-group-item">
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="radio" value="@item.QuestionA" id="defaultCheck1" name="A">
-                                                    <label class="form-check-label" for="defaultCheck1">
-                                                        @item.QuestionA
-                                                    </label>
-                                                </div>
-                                            </li>
-                                            <li class="list-group-item">
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="radio" value="@item.QuestionB" id="defaultCheck2" name="B">
-                                                    <label class="form-check-label" for="defaultCheck2">
-                                                        @item.QuestionB
-                                                    </label>
-                                                </div>
-                                            </li>
-                                            <li class="list-group-item">
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="radio" value="@item.QuestionC" id="defaultCheck3" name="C">
-                                                    <label class="form-check-label" for="defaultCheck3">
-                                                        @item.QuestionC
-                                                    </label>
-                                                </div>
-                                            </li>
-                                            <li class="list-group-item">
-                                                <input type="hidden" value="@item.QCorrectAns" name="Answer" id="Answer">
-                                            </li>
-                                        </ul>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" value="@item.QuestionB" id="defaultCheck2" name="B">
+                                            @* <label class="form-check-label" for="defaultCheck2">
+                                        @item.QuestionB
+                                        </label>*@
+                                            <input type="text" class="form-control" id="QuestionA" name="QuestionA" placeholder=" @item.QuestionB" width="40">
 
-                                    </div>
-                                </div>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" value="@item.QuestionC" id="defaultCheck3" name="C">
+                                            @* <label class="form-check-label" for="defaultCheck3">
+                                        @item.QuestionC
+                                        </label>*@
+                                            <input type="text" class="form-control" id="QuestionA" name="QuestionA" placeholder=" @item.QuestionC" width="40">
+
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <input type="text" class="form-control" value="@item.QCorrectAns" name="Answer" id="Answer"  width="40">
+                                    </li>
+                                </ul>
+
                             </div>
                         </div>
-                        <br />
-                        <br />                    
-                
-                }
+                    </div>
+                </div>
+                <br />
+                <br />
 
-
-            </div>
-
-
+            }
         </div>
 
-
-
+        <div class="d-flex justify-content-center mb-5">
+            <input type="submit" class="btn btn-lg btn-success" id="quiz" value="Soruları Güncelle" />
+        </div>
+        </form>
     </div>
+
+
+
+</div>
