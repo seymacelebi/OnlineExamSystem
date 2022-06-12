@@ -28,7 +28,7 @@
                             <div class="card-body">
                                 <h5 class="card-title"></h5>
                                 @*<p class="card-text">@item.QuestionText</p>*@
-                                <textarea id="w3review" name="QuestionText" rows="4" cols="135">@item.QuestionText</textarea>
+                                <textarea id="w3review" name="QuestionText" rows="4" cols="136">@item.QuestionText</textarea>
                                 <ul class="list-group list-group-flush">
                                     <li class="list-group-item">
                                         <div class="form-check">
@@ -61,6 +61,7 @@
                                         </div>
                                     </li>
                                     <li class="list-group-item">
+                                        <label class="form-check-label">Doğru Cevap:</label>
                                         <input type="text" class="form-control" value="@item.QCorrectAns" name="Answer" id="Answer"  width="40">
                                     </li>
                                 </ul>

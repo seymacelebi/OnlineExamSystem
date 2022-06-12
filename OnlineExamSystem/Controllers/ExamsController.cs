@@ -269,7 +269,7 @@ namespace OnlineExamSystem.Controllers
             c.Questions.Update(q);
             c.SaveChanges();
 
-            return View();
+            return RedirectToAction("ViewAllQuestions");
         }
 
         //public IActionResult ViewAllQuestions(QuizVM model)
