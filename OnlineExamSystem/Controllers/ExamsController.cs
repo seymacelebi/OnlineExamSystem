@@ -24,7 +24,7 @@ namespace OnlineExamSystem.Controllers
             public int CourseId { get; set; }
         }
         ExamManager examManager = new ExamManager(new EfExamDal());
-        CourseManager courseManager = new CourseManager (new EfCourseDal());
+        CourseManager courseManager = new CourseManager(new EfCourseDal());
         Context c = new Context();
         public IActionResult Index()
         {
@@ -40,7 +40,7 @@ namespace OnlineExamSystem.Controllers
             return View(coursevalues);
         }
 
-        
+
         [HttpGet]
         [Authorize(Policy = "Ogretmen")]
         public IActionResult AddCourse()
@@ -68,15 +68,15 @@ namespace OnlineExamSystem.Controllers
         {
             var studentId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-           
-           
+
+
             return View(CourseId);
         }
         [HttpPost]
         [Authorize(Policy = "Ogretmen")]
         public IActionResult AddQuestions(Question question)
         {
-         
+
             Question q = new Question();
             q.QuestionText = question.QuestionText;
             q.QuestionA = question.QuestionA;
@@ -88,10 +88,10 @@ namespace OnlineExamSystem.Controllers
             q.CourseId = question.CourseId;
             c.Questions.Add(q);
             c.SaveChanges();
-            
-            return View(question.CourseId);
+
+            return RedirectToAction("AddQuestions", new { CourseId = question.CourseId });
         }
-      
+
         public IActionResult ExamDashboard()
         {
             return View();
@@ -103,7 +103,7 @@ namespace OnlineExamSystem.Controllers
             List<Course> listCourse = c.Course.ToList();
             foreach (var item in listCourse)
             {
-                if (item.Title==course)
+                if (item.Title == course)
                 {
                     List<Question> list = c.Questions.Where(x => x.CourseId == item.CourseId).ToList();
                     Queue<Question> queue = new Queue<Question>();
@@ -127,22 +127,22 @@ namespace OnlineExamSystem.Controllers
             }
             return View();
         }
-  
+
         public IActionResult StartQuiz(int CourseId)
         {
             var question = c.Questions.Where(x => x.CourseId == CourseId).ToList();
             StartQuizVm startQuizVm = new StartQuizVm()
             {
                 Question = question,
-                CourseId=CourseId
+                CourseId = CourseId
             };
-            
-              
-       
+
+
+
             return View(startQuizVm);
         }
 
-       
+
         [HttpPost]
         public IActionResult StartQuiz(QuizVM model)
         {
@@ -182,13 +182,13 @@ namespace OnlineExamSystem.Controllers
                          join r in c.Course
                          on ur.CourseId equals r.CourseId
                          where ur.UserId == Convert.ToInt32(studentId)
-                         
+
                          select new ExamResultVm
                          {
-                            ClassName=r.Title,
-                            Result=ur.Score,
-                            Level=ur.LevelQuiz
-                            
+                             ClassName = r.Title,
+                             Result = ur.Score,
+                             Level = ur.LevelQuiz
+
                          };
 
 
@@ -203,10 +203,10 @@ namespace OnlineExamSystem.Controllers
 
             return View(rest);
         }
-       
+
         public IActionResult ExamResultStudentScore(int CourseId)
         {
-            
+
             var result = from ur in c.ExamResult
                          join r in c.Course
                          on ur.CourseId equals r.CourseId
@@ -216,9 +216,9 @@ namespace OnlineExamSystem.Controllers
 
                          select new ExamResultStudentVm
                          {
-                             User = u.FirstName +" "+ u.LastName,
+                             User = u.FirstName + " " + u.LastName,
                              Result = ur.Score,
-                             level=ur.LevelQuiz,
+                             level = ur.LevelQuiz,
 
 
                          };

@@ -62,6 +62,14 @@ namespace WebUI.Controllers
                     new Claim(ClaimTypes.NameIdentifier,datavalue.UserId.ToString()),
                    
                 };
+                if (!datavalue.IsStudent && datavalue.IsAdmin)
+                {
+                    claims.Add(new Claim(ClaimTypes.Role, "Admin"));
+                    var x = new ClaimsIdentity(claims, "login");
+                    ClaimsPrincipal y = new ClaimsPrincipal(x);
+                    await HttpContext.SignInAsync(y);
+                    return Redirect("/Students/StudentList");
+                }
     
                 if (!datavalue.IsStudent)
                 {

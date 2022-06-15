@@ -35,29 +35,31 @@ namespace WebUI.Controllers
         public IActionResult StudentList(User Student)
         {
             //List<User> list = c.Users.Where(x => x.IsStudent == Student.IsStudent).ToList();
-            List<User> list = c.Users.Where(x => x.IsStudent == true).ToList();
+            List<User> list = c.Users.Where(x => x.IsStudent == true || x.IsStudent==false && x.IsAdmin == false).ToList();
            
             return View(list);
         }
         [HttpGet]
+        [Authorize(Policy = "Admin")]
         public IActionResult AddStudent()
         {
             return View();
         }
 
         [HttpPost]
-        [Authorize(Policy = "Ogretmen")]
+        [Authorize(Policy = "Admin")]
         public IActionResult AddStudent(User User)
         {
             _studentService.Add(User);
             return RedirectToAction("StudentList");
         }
-        [HttpPost("delete")]
-        [Authorize(Policy = "Ogretmen")]
-        public IActionResult Delete(User student)
+        
+        [Authorize(Policy = "Admin")]
+        public IActionResult Delete(int userId)
         {
-            _studentService.Delete(student);       
-            return RedirectToAction("Index");
+            var user = _studentService.GetById(userId);
+            _studentService.Delete(user);       
+            return RedirectToAction("StudentList");
         }
     }
 }

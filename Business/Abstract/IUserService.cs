@@ -10,7 +10,7 @@ namespace Business.Abstract
     public interface IUserService
     {
        // List<OperationClaim> GetClaims(User user);
-        List<User> GetById(int userId);
+        User GetById(int userId);
         User GetByMail(string email);
         User GetByName(string firstName);
         User GetByLastName(string lastName);

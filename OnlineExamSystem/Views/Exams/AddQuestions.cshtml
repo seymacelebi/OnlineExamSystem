@@ -1,5 +1,6 @@
-﻿@Model
+﻿
 @{
+    
     ViewData["Title"] = "AddQuestions";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -10,11 +11,11 @@
     <div class="container">
         <div class="row">
 
-            <input type="hidden" name="CourseId" value="@Model" />
+            <input type="hidden" name="CourseId" value="@Model" hidden/>
             <div class="row">
                 <div class="form-group">
                     <label for="QuestionText">Soru içeriğini giriniz</label>
-                    <div class="card border border border-secondary rounded">
+                    <div class="card border border sborder-secondary rounded">
                         <div class="card-body">
                             <h5 class="card-title"></h5>
                             <textarea id="w3review" name="QuestionText" rows="7" cols="158"> </textarea>
