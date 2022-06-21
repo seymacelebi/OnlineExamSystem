@@ -173,8 +173,7 @@ namespace OnlineExamSystem.Controllers
             return Json("/Course/Index");
         }
 
-
-
+        [Authorize(Policy = "Ogretmen")]
         public IActionResult ExamResult()
         {
             var studentId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);

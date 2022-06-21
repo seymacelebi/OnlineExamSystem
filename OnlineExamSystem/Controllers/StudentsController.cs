@@ -16,13 +16,13 @@ namespace WebUI.Controllers
     public class StudentsController : Controller
     {
         //IStudentService studentManager = new StudentManager(new EfStudentDal());
-        IUserService _studentService;
+        IUserService _userService;
         Context c = new Context();
 
 
         public StudentsController(IUserService productService)
         {
-            _studentService = productService;
+            _userService = productService;
         }
         public IActionResult Index()
         {
@@ -35,8 +35,8 @@ namespace WebUI.Controllers
         public IActionResult StudentList(User Student)
         {
             //List<User> list = c.Users.Where(x => x.IsStudent == Student.IsStudent).ToList();
-            List<User> list = c.Users.Where(x => x.IsStudent == true || x.IsStudent==false && x.IsAdmin == false).ToList();
-           
+            List<User> list = c.Users.Where(x => x.IsStudent == true).ToList();
+
             return View(list);
         }
         [HttpGet]
@@ -50,16 +50,27 @@ namespace WebUI.Controllers
         [Authorize(Policy = "Admin")]
         public IActionResult AddStudent(User User)
         {
-            _studentService.Add(User);
+            _userService.Add(User);
             return RedirectToAction("StudentList");
         }
         
         [Authorize(Policy = "Admin")]
         public IActionResult Delete(int userId)
         {
-            var user = _studentService.GetById(userId);
-            _studentService.Delete(user);       
+            var user = _userService.GetById(userId);
+            _userService.Delete(user);       
             return RedirectToAction("StudentList");
         }
+
+        [HttpGet]
+        [Authorize(Policy = "Admin")]
+        public IActionResult UserList(User user)
+        {
+            //List<User> list = c.Users.Where(x => x.IsStudent == Student.IsStudent).ToList();
+            List<User> list = c.Users.Where(x => x.IsStudent == true || x.IsStudent == false && x.IsAdmin == false).ToList();
+
+            return View(list);
+        }
+     
     }
 }

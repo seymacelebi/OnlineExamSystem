@@ -21,12 +21,19 @@
             <div>
                 <a href="/Exams/Index" class="nav_logo"> <i class='bx bx-layer nav_logo-icon'></i> <span class="nav_logo-name">Uskudar University</span> </a>
                 <div class="nav_list">
+
                     <a href="/Exams/Index" class="nav_link active"> <i class='bx bx-grid-alt nav_icon'></i> <span class="nav_name">Dashboard</span> </a>
-                    <a href="/Students/StudentList" class="nav_link"> <i class='bx bx-user nav_icon'></i> <span class="nav_name">Öğrenciler</span> </a>
-                    <a href="/Exams/GetList" class="nav_link"> <i class='bx bx-message-square-detail nav_icon'></i> <span class="nav_name">Sınavlar</span> </a>
+                     @if (this.User.IsInRole("Ogretmen"))
+                    {
+                        <a href="/Students/StudentList" class="nav_link"> <i class='bx bx-user nav_icon'></i> <span class="nav_name">Öğrenciler</span> </a>
+                    }
+                    @if (this.User.IsInRole("Ogretmen"))
+                    {
+                        <a href="/Exams/GetList" class="nav_link"> <i class='bx bx-message-square-detail nav_icon'></i> <span class="nav_name">Sınavlar</span> </a>
+                    }
                     @*<a href="/Exams/ExamResult" class="nav_link"> <i class='bx bx-bookmark nav_icon'></i> <span class="nav_name">Exam Result</span> </a>*@
 
-                    @if (!this.User.IsInRole("Ogretmen"))
+                    @if (!this.User.IsInRole("Ogretmen") && !this.User.IsInRole("Admin"))
                     {
                         <a href="/Exams/ExamResult" class="nav_link"> <i class='bx bx-bookmark nav_icon'></i> <span class="nav_name">Sınav Sonuclarım</span> </a>
 
@@ -37,8 +44,17 @@
 
                     }
 
+                     @if (this.User.IsInRole("Admin"))
+                    {
+                        <a href="/Students/UserList" class="nav_link"> <i class='bx bx-user nav_icon'></i> <span class="nav_name">Kullancılar</span> </a>
 
+                    }
+                        @if (this.User.IsInRole("Admin"))
+                    {
+                        <a href="/Course/Index" class="nav_link"> <i class='bx bx-book nav-icon'></i> <span class="nav_name">Dersler</span> </a>
+                        <a href="/Exams/AddCourse" class="nav_link"> <i class='bx bx-book nav-icon'></i> <span class="nav_name">Ders Ekle</span> </a>
 
+                    }
 
                     @*<a href="/Course/Index" class="nav_link"> <i class='bx bx-folder nav_icon'></i> <span class="nav_name">Dersler</span> </a>*@
                     @*<a href="#" class="nav_link"> <i class='bx bx-bar-chart-alt-2 nav_icon'></i> <span class="nav_name">Stats</span> </a> </div>*@
