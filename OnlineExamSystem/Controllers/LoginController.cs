@@ -68,7 +68,7 @@ namespace WebUI.Controllers
                     var x = new ClaimsIdentity(claims, "login");
                     ClaimsPrincipal y = new ClaimsPrincipal(x);
                     await HttpContext.SignInAsync(y);
-                    return Redirect("/Students/StudentList");
+                    return Redirect("/Exams/Index");
                 }
     
                 if (!datavalue.IsStudent)
@@ -84,7 +84,7 @@ namespace WebUI.Controllers
                 var useridentity = new ClaimsIdentity(claims, "login");
                 ClaimsPrincipal principal = new ClaimsPrincipal(useridentity);
                 await HttpContext.SignInAsync(principal);
-                return RedirectToAction("Index", "Course");
+                return RedirectToAction("Index", "Exams");
             }
             else
             {
