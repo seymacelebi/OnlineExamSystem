@@ -40,7 +40,6 @@ namespace OnlineExamSystem.Controllers
             return View(coursevalues);
         }
 
-
         [HttpGet]
         [Authorize(Policy = "Ogretmen")]
         public IActionResult AddCourse()
@@ -49,6 +48,7 @@ namespace OnlineExamSystem.Controllers
             ViewData["list"] = courselist;
             return View();
         }
+
         [HttpPost]
         [Authorize(Policy = "Ogretmen")]
         public IActionResult AddCourse(Course course)
@@ -62,16 +62,15 @@ namespace OnlineExamSystem.Controllers
             c.SaveChanges();
             return View();
         }
+
         [HttpGet]
         [Authorize(Policy = "Ogretmen")]
         public IActionResult AddQuestions(int CourseId)
         {
             var studentId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-
-
-
             return View(CourseId);
         }
+
         [HttpPost]
         [Authorize(Policy = "Ogretmen")]
         public IActionResult AddQuestions(Question question)
@@ -97,6 +96,7 @@ namespace OnlineExamSystem.Controllers
             return View();
 
         }
+
         [HttpPost]
         public IActionResult ExamDashboard(string course)
         {
@@ -112,9 +112,7 @@ namespace OnlineExamSystem.Controllers
                         queue.Enqueue(question);
                     }
                     TempData["questions"] = queue;
-
                     TempData["score"] = 0;
-
                     TempData["examid"] = item.CourseId;
                     TempData.Keep();
                     return RedirectToAction("Start Quiz");
@@ -159,9 +157,8 @@ namespace OnlineExamSystem.Controllers
                 LevelQuiz = 1,
                 Score = Result,
                 UserId = Convert.ToInt32(studentId)
-
-
             };
+
             var course = c.Course.Where(x => x.CourseId == model.CourseId).FirstOrDefault();
             course.check = true;
             c.Course.Update(course);
@@ -183,11 +180,9 @@ namespace OnlineExamSystem.Controllers
                          {
                              ClassName = r.Title,
                              Result = ur.Score,
-                             Level = ur.LevelQuiz
+                             Level = ur.LevelQuiz,
 
                          };
-
-
             return View(result.ToList());
         }
 
@@ -220,8 +215,26 @@ namespace OnlineExamSystem.Controllers
 
             return View(result.ToList());
         }
+        public IActionResult  StudentCourse(int CourseId)
+        {
 
- 
+            var result = from ur in c.StudentCourses
+                         join r in c.Course
+                         on ur.CourseId equals r.CourseId
+                         join u in c.Users
+                         on ur.UserId equals u.UserId
+                         where ur.CourseId == CourseId
+
+                         select new ExamResultStudentVm
+                         {
+                             User = u.FirstName + " " + u.LastName,
+                            
+                         };
+            var a = result.ToList();
+
+            return View(result.ToList());
+        }
+
         public IActionResult ViewAllQuestions(int CourseId)
         {
             var question = c.Questions.Where(x => x.CourseId == CourseId).ToList();
@@ -230,11 +243,9 @@ namespace OnlineExamSystem.Controllers
                 Question = question,
                 CourseId = CourseId
             };
-
-
-
             return View(startQuizVm);
         }
+
         [HttpPost]
         public IActionResult ViewAllQuestions(Question question)
         {
@@ -254,7 +265,6 @@ namespace OnlineExamSystem.Controllers
             return RedirectToAction("ViewAllQuestions");
         }
 
-   
         public IActionResult EndExam(Question question)
         {
             return View();

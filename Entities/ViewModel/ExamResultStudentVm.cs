@@ -9,5 +9,6 @@ namespace Entities.ViewModel
         public string User { get; set; }
         public int Result { get; set; }
         public int level { get; set; }
+        //public string CourseName { get; set; }
     }
 }
