@@ -81,6 +81,14 @@
                                                 </label>
                                             </div>
                                         </li>
+                                             <li class="list-group-item">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" value="@item.QuestionD" id="defaultCheck4" name="D">
+                                                <label class="form-check-label" for="defaultCheck4">
+                                                    @item.QuestionD
+                                                </label>
+                                            </div>
+                                        </li>
                                         <li class="list-group-item">
                                             <input type="hidden" value="@item.QCorrectAns" name="Answer" id="Answer">
                                         </li>
@@ -254,59 +262,7 @@
         });
 
     });
-                                                                                // if (document.addEventListener) document.addEventListener
-                                                                                //    ('keypress', F5IptalEt, true);
-
-                                                                                //else if (document.attachEvent) document.attachEvent('onkeydown', F5IptalEt);
-
-                                                                                //  else document.onkeydown = F5IptalEt;
-
-                                                                                //    function F5IptalEt(event) {
-
-                                                                                //       if (!event) event = window.event;
-
-                                                                                //      if (!event) return;
-
-                                                                                //      var keyCode = event.keyCode ? event.keyCode : event.charCode;
-
-                                                                                //    //116 F5 tuşu
-
-                                                                                //      if (keyCode == 116) {
-
-                                                                                //        // Standart DOM (Mozilla):
-
-                                                                                //         if (event.preventDefault) event.preventDefault();
-
-                                                                                //        //IE
-
-                                                                                //          if (document.all && window.event && !event.preventDefault) {
-
-                                                                                //              event.cancelBubble = true;
-
-                                                                                //              event.returnValue = false;
-
-                                                                                //              event.keyCode = 0;
-
-
-                                                                                //        }
-
-                                                                                //          alert('F5 Tuşu Malesef Yasak Kardeşim');
-
-                                                                                //          return false;
-
-                                                                                //    }
-
-                                                                                //}
-                                                                                //if (document.all) {
-                                                                                //    document.onkeydown = function() {
-                                                                                //        var key_f5 = 116; // 116 = F5
-                                                                                //        if (key_f5 == event.keyCode) {
-                                                                                //            event.keyCode = 0;
-                                                                                //            alert("F5 tuşu iptal!");
-                                                                                //        }
-                                                                                //        return false;
-                                                                                //    }
-                                                                                //}
+                                                                         
 
 
 
@@ -351,7 +307,3 @@
             border-radius: 2px;
         }
 </style>
-@*</body>
-</html>
-
-*@

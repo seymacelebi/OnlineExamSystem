@@ -22,11 +22,14 @@ namespace Business.Concrete
             var exam = new Exam
             {
                 Title = examDto.Title,
-                Information = examDto.Information,
-                NumberOfQuestion = examDto.NumberOfQuestion,
+                //Information = examDto.Information,
+                //NumberOfQuestion = examDto.NumberOfQuestion,
                 AddedAt = DateTime.Now,
                 StartTime = DateTime.Parse(examDto.StartTime),
-                EndTime = DateTime.Parse(examDto.EndTime)
+                EndTime = DateTime.Parse(examDto.EndTime),
+                check = examDto.check,
+                UserId = examDto.UserId,
+                CourseId = examDto.CourseId
             };
             _examDal.Add(exam);
         }

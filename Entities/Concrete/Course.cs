@@ -14,5 +14,6 @@ namespace Entities.Concrete
         public DateTime AddedAt { get; set; }
         public bool check { get; set; }
         public int UserId { get; set; }
+        public User User { get; set; }
     }
 }

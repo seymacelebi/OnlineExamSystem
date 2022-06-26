@@ -188,26 +188,6 @@ namespace WebUI.Controllers
             
             return RedirectToAction("Index");
         }
-        //[HttpGet]
-        //public ActionResult AdminIndex()
-        //{
-        //    return View();
-        //}
-        //[HttpPost]
-        //public ActionResult AdminIndex(Admin p)
-        //{
-        //    Context c = new Context();
-        //    var adminuserinfo = c.Admins.FirstOrDefault(x => x.AdminUserName == p.AdminUserName && x.AdminPassword == p.AdminPassword);
-        //    if (adminuserinfo != null)
-        //    {
-        //        FormsAuthentication.SetAuthCookie(adminuserinfo.AdminUserName, false);
-        //    Session["AdminUserName"] = adminuserinfo.AdminUserName;
-        //        return RedirectToAction("Index", "AdminCategory");
-        //    }
-        //    else
-        //    {
-        //        return RedirectToAction("Index");
-        //    }
-        //}
+  
     }
 }

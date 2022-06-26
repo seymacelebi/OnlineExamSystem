@@ -136,9 +136,6 @@ namespace OnlineExamSystem.Controllers
                 Question = question,
                 CourseId = CourseId
             };
-
-
-
             return View(startQuizVm);
         }
 
@@ -153,7 +150,7 @@ namespace OnlineExamSystem.Controllers
                 var check = x.OkeyQuestion.Trim();
                 if (x.Answer == check)
                 {
-                    Result += 10;
+                    Result += 20;
                 }
             }
             ExamResult examResult = new ExamResult()
@@ -218,27 +215,13 @@ namespace OnlineExamSystem.Controllers
                              User = u.FirstName + " " + u.LastName,
                              Result = ur.Score,
                              level = ur.LevelQuiz,
-
-
                          };
             var a = result.ToList();
 
             return View(result.ToList());
         }
 
-        //public IActionResult StartQuiz(int CourseId)
-        //{
-        //    var question = c.Questions.Where(x => x.CourseId == CourseId).ToList();
-        //    StartQuizVm startQuizVm = new StartQuizVm()
-        //    {
-        //        Question = question,
-        //        CourseId = CourseId
-        //    };
-
-
-
-        //    return View(startQuizVm);
-        //}
+ 
         public IActionResult ViewAllQuestions(int CourseId)
         {
             var question = c.Questions.Where(x => x.CourseId == CourseId).ToList();
@@ -271,22 +254,7 @@ namespace OnlineExamSystem.Controllers
             return RedirectToAction("ViewAllQuestions");
         }
 
-        //public IActionResult ViewAllQuestions(QuizVM model)
-        //{
-        //    //if (Session["ad_id"]==null) 
-        //    //{              
-        //    //    return RedirectToAction("tlogin");
-        //    //}
-        //    //if (id==null)
-        //    //{
-        //    //    return RedirectToAction("Dashboard");
-        //    //}
-        //    //int pagesize = 15, pageIndex = 1;
-
-        //    //return View(c.Questions.Where(x => x.CourseId == model.CourseId).ToList());
-        //    return View();
-
-        //}
+   
         public IActionResult EndExam(Question question)
         {
             return View();

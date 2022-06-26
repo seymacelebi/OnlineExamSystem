@@ -51,7 +51,7 @@ namespace WebUI.Controllers
         public IActionResult AddStudent(User User)
         {
             _userService.Add(User);
-            return RedirectToAction("StudentList");
+            return RedirectToAction("UserList");
         }
         
         [Authorize(Policy = "Admin")]
