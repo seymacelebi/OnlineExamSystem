@@ -44,6 +44,8 @@ namespace OnlineExamSystem.Controllers
         [Authorize(Policy = "Ogretmen")]
         public IActionResult AddCourse()
         {
+            //ViewBag.UsersData = new SelectList(c.Users, "UserId", "FullName");
+            ViewBag.UsersData = new SelectList(c.Users.Where(s=>s.IsStudent ==false && s.IsAdmin ==false), "UserId", "FullName");
             List<Course> courselist = c.Course.OrderByDescending(x => x.CourseId).ToList();
             ViewData["list"] = courselist;
             return View();
@@ -57,7 +59,6 @@ namespace OnlineExamSystem.Controllers
             ViewData["list"] = courselist;
             Course courses = new Course();
             courses.Title = course.Title;
-            //courses.CourseId = Convert.ToInt32(Session["ad_id"].ToString());
             c.Course.Add(courses);
             c.SaveChanges();
             return View();
@@ -225,10 +226,12 @@ namespace OnlineExamSystem.Controllers
                          on ur.UserId equals u.UserId
                          where ur.CourseId == CourseId
 
-                         select new ExamResultStudentVm
+                         select new StudentCourseVm
                          {
-                             User = u.FirstName + " " + u.LastName,
-                            
+                             UserName = u.FirstName + " " + u.LastName,
+                             CourseId = CourseId,
+                             CourseName = u.FirstName,  
+                             UserId = ur.UserId,                           
                          };
             var a = result.ToList();
 

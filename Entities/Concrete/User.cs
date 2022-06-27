@@ -17,6 +17,8 @@ namespace Entities.Concrete
         public int UserId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
+
+        [DisplayName("Ad Soyad")]
         public string FullName
         {
             get { return FirstName + " " + LastName; }
