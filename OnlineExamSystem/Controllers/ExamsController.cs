@@ -2,6 +2,7 @@
 using DataAccess.Concrete;
 using DataAccess.Concrete.EntityFramework;
 using Entities.Concrete;
+using Entities.DTOs;
 using Entities.ViewModel;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -44,24 +45,26 @@ namespace OnlineExamSystem.Controllers
         [Authorize(Policy = "Ogretmen")]
         public IActionResult AddCourse()
         {
-            //ViewBag.UsersData = new SelectList(c.Users, "UserId", "FullName");
-            ViewBag.UsersData = new SelectList(c.Users.Where(s=>s.IsStudent ==false && s.IsAdmin ==false), "UserId", "FullName");
-            List<Course> courselist = c.Course.OrderByDescending(x => x.CourseId).ToList();
-            ViewData["list"] = courselist;
-            return View();
+            CourseDto courseDto = new CourseDto();
+            courseDto.User = c.Users.Where(s => s.IsStudent == false && s.IsAdmin == false).ToList();
+         
+    
+            return View(courseDto);
         }
 
         [HttpPost]
         [Authorize(Policy = "Ogretmen")]
-        public IActionResult AddCourse(Course course)
+        public IActionResult AddCourse(CourseDto courseDto)
         {
-            List<Course> courselist = c.Course.OrderByDescending(x => x.CourseId).ToList();
-            ViewData["list"] = courselist;
-            Course courses = new Course();
-            courses.Title = course.Title;
-            c.Course.Add(courses);
+
+            Course course = new Course();
+            course.Title = courseDto.Title;
+            course.UserId = courseDto.UserId;
+            course.AddedAt = DateTime.Now;
+
+            c.Course.Add(course);
             c.SaveChanges();
-            return View();
+            return Redirect("Index");
         }
 
         [HttpGet]
@@ -236,6 +239,27 @@ namespace OnlineExamSystem.Controllers
             var a = result.ToList();
 
             return View(result.ToList());
+        }
+        [Authorize(Policy = "Admin")]
+
+        public IActionResult AddStudentCoursee()
+        {
+            StudentCourseDTo studentCourseDTo = new StudentCourseDTo();
+            studentCourseDTo.Course = c.Course.ToList();
+            studentCourseDTo.Student = c.Users.Where(x=>x.IsStudent== true && x.IsAdmin == false).ToList();
+
+            return View(studentCourseDTo);
+        }
+        [Authorize(Policy = "Admin")]
+        [HttpPost]
+        public IActionResult AddStudentCoursee(StudentCourseDTo studentCourseDTo)
+        {
+            StudentCourse studentCourse = new StudentCourse();
+            studentCourse.CourseId = studentCourseDTo.CourseId;
+            studentCourse.UserId = studentCourseDTo.UserId;
+            c.StudentCourses.Add(studentCourse);
+            c.SaveChanges();
+            return Redirect("Index");
         }
 
         public IActionResult ViewAllQuestions(int CourseId)

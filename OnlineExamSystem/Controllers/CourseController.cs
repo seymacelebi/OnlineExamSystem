@@ -35,7 +35,24 @@ namespace OnlineExamSystem.Controllers
             return View(result.ToList());
         }
 
-       
+        public IActionResult IndexAdmin()
+        {
+            var result = from ur in c.StudentCourses
+                         join r in c.Course
+                         on ur.CourseId equals r.CourseId
+                         
+                         select new Course
+                         {
+                             CourseId = ur.CourseId,
+                             UserId = r.UserId,
+                             Title = r.Title,
+                             AddedAt = r.AddedAt,
+                             check = r.check
+                         };
+
+            return View(result.ToList());
+        }
+
 
     }
 }
