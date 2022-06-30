@@ -20,9 +20,9 @@ namespace WebUI.Controllers
         Context c = new Context();
 
 
-        public StudentsController(IUserService productService)
+        public StudentsController(IUserService userService)
         {
-            _userService = productService;
+            _userService = userService;
         }
         public IActionResult Index()
         {
