@@ -41,8 +41,7 @@ namespace OnlineExamSystem.Controllers
             List<Course> list = c.Course.Where(x=>x.UserId == user).ToList();
 
             return View(list);
-            //var coursevalues = courseManager.GetList().Where(x=>x.UserId == user);
-            //return View(coursevalues);
+          
         }
 
         [HttpGet]

@@ -23,23 +23,44 @@
                 @Html.ValidationMessageFor(model=>model.Title, "", new {@class = "text-danger"})
             </div>
         </div>
+        <br/><br/>
+        @*       <div class="form-group">
+
+    <label for="UserId">Öğretmen Seçiniz</label>
+    <br/>
+    <select  class="custom-select" id="UserId" name="UserId">
+    @foreach (var x in Model.User)
+    {
+    <option value="@x.UserId">@x.FirstName @x.LastName</option>
+
+    }
+
+    </select>
+    </div>*@
         <div class="form-group">
             <label for="UserId">Öğretmen Seçiniz</label>
-            <select id="UserId" name="UserId">
-                @foreach (var x in Model.User)
-                {
-                <option value="@x.UserId">@x.FirstName @x.LastName</option>
-                    
-                }        
-                
-            </select>
+            <br>
+            <div class="col-md-10">
+                <select id="UserId" class="form-select form-select-sm mb-3" id="UserId" name="UserId">>
+            
+                    <option selected>Bir öğrenci seçiniz.</option>
+
+                    @foreach (var x in Model.User)
+                    {
+                        <option value="@x.UserId">@x.FirstName @x.LastName</option>
+
+                    }
+
+                </select>
+            </div>
+
         </div>
-   
-        <hr>
+
+
 
         <div class="form-group">
             <div class="col-md-10">
-                <input type="submit" value="Create" class="btn btn-outline-primary" />
+                <input type="submit" value="Oluştur" class="btn btn-outline-primary" />
             </div>
         </div>
     </div>

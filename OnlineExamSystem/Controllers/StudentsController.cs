@@ -3,6 +3,7 @@ using Business.Concrete;
 using DataAccess.Concrete;
 using DataAccess.Concrete.EntityFramework;
 using Entities.Concrete;
+using Entities.DTOs;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -28,7 +29,7 @@ namespace WebUI.Controllers
         {
             return View();
         }
-       
+
         [HttpGet]
         [Authorize(Policy = "Ogretmen")]
         //[Authorize(Policy = "Admin")]
@@ -53,12 +54,12 @@ namespace WebUI.Controllers
             _userService.Add(User);
             return RedirectToAction("UserList");
         }
-        
+
         [Authorize(Policy = "Admin")]
         public IActionResult Delete(int userId)
         {
             var user = _userService.GetById(userId);
-            _userService.Delete(user);       
+            _userService.Delete(user);
             return RedirectToAction("StudentList");
         }
 
@@ -71,6 +72,28 @@ namespace WebUI.Controllers
 
             return View(list);
         }
-     
+        [Authorize(Policy = "Admin")]
+
+        public IActionResult StudentAssignedCourse()
+        {
+            StudentCourseDTo studentCourseDTo = new StudentCourseDTo();
+            studentCourseDTo.Course = c.Course.ToList();
+            studentCourseDTo.Student = c.Users.Where(x => x.IsStudent == true && x.IsAdmin == false).ToList();
+
+            return View(studentCourseDTo);
+        }
+        [Authorize(Policy = "Admin")]
+        [HttpPost]
+        public IActionResult StudentAssignedCourse(StudentCourseDTo studentCourseDTo)
+        {
+            StudentCourse studentCourse = new StudentCourse();
+            studentCourse.CourseId = studentCourseDTo.CourseId;
+            studentCourse.UserId = studentCourseDTo.UserId;
+            c.StudentCourses.Add(studentCourse);
+            c.SaveChanges();
+            return Redirect("StudentAssignedCourse");
+        }
+
+
     }
 }

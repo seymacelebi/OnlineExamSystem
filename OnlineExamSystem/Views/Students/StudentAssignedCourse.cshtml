@@ -1,0 +1,61 @@
+﻿@using Entities.DTOs
+@model StudentCourseDTo
+@{
+    ViewData["Title"] = "StudentAssignedCourse";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+
+    <div class="form-control">
+
+
+        <div class="form-group">
+            <label for="UserId">Öğrenci Seçiniz</label>
+            <br />
+            <select class="form-select form-select-lg mb-3" id="UserId" name="UserId">
+                <option selected>Bir öğrenci seçiniz.</option>
+
+                @foreach (var x in Model.Student)
+                {
+
+                    <option value="@x.UserId">@x.FirstName @x.LastName</option>
+
+                }
+
+            </select>
+        </div>
+        <br />
+        <div class="form-group">
+            <label for="UserId">Ders Seçiniz</label>
+            <br />
+
+            <select class="form-select form-select-lg mb-3" id="UserId" name="CourseId">
+                <option selected>Bir ders seçiniz.</option>
+
+                @foreach (var x in Model.Course)
+                {
+
+                    <option value="@x.CourseId">@x.Title</option>
+
+                }
+
+            </select>
+        </div>
+
+
+  @*      <div class="form-group">
+            <div class="col-md-10">
+                <input type="submit" value="Oluştur" class="btn btn-outline-primary" />
+            </div>
+        </div>*@
+           <div class="d-flex justify-content-center mb-5">
+                <input type="submit" class="btn btn-outline-primary"  value="Kaydet" />
+            </div>
+    </div>
+}
+
+
