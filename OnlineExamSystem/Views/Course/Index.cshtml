@@ -9,7 +9,6 @@
 <table class="table table-dark mt-5">
     <thead>
         <tr>
-            <th scope="col">#</th>
             <th scope="col">Ders Adı</th>
             <th scope="col"></th>
             <th scope="col"></th>
@@ -35,7 +34,6 @@
             foreach (var x in Model)
             {
                 <tr>
-                    <th scope="row">@x.CourseId</th>
                     <td>@x.Title</td>
                     <td>@if (x.check == false)
                         {
