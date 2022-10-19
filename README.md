@@ -15,7 +15,7 @@ Project is created with:
 *  Mssql Server
 * Authorization and Authentication
 
-##Pictures
+## Pictures
 *![Çıktı](https://github.com/seymacelebi/OnlineExamSystem/blob/master/OnlineExamSystem/wwwroot/pic/loginpage.png)
 *![Çıktı](https://github.com/seymacelebi/OnlineExamSystem/blob/master/OnlineExamSystem/wwwroot/pic/examdashboard.png)
 *![Çıktı](https://github.com/seymacelebi/OnlineExamSystem/blob/master/OnlineExamSystem/wwwroot/pic/studentexampage.png)
